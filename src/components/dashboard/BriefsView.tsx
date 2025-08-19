@@ -63,7 +63,7 @@ const BriefsMetricsSection: React.FC = () => {
             className="w-full"
             style={{ background: "#29b273" }}
             onClick={() => {
-              const briefBuilderUrl = `https://cquel-brief-builder.vercel.app/brief?user=456`;
+              const briefBuilderUrl = `https://cquel-brief-builder.vercel.app/?userId=456`;
               window.open(briefBuilderUrl, '_blank');
             }}
           >
@@ -292,7 +292,7 @@ const BriefCard: React.FC<{ brief: Brief }> = ({ brief }) => {
             size="custom" 
             className="w-[140px] whitespace-nowrap"
             onClick={() => {
-              const briefBuilderUrl = `https://cquel-brief-builder.vercel.app/brief?id=${brief.id}&user=456`;
+              const briefBuilderUrl = `https://cquel-brief-builder.vercel.app/?briefId=${brief.id}&userId=456`;
               window.open(briefBuilderUrl, '_blank');
             }}
           >
