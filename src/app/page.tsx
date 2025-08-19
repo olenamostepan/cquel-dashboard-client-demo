@@ -8,6 +8,8 @@ import FocusActions from "@/components/dashboard/FocusActions";
 import AllProjectsView from "@/components/dashboard/AllProjectsView";
 import TendersView from "@/components/dashboard/TendersView";
 import SurveysView from "@/components/dashboard/SurveysView";
+import PricingView from "@/components/dashboard/PricingView";
+import BriefsView from "@/components/dashboard/BriefsView";
 
 export default function Home() {
   const [active, setActive] = React.useState("focus");
@@ -86,7 +88,19 @@ export default function Home() {
           </section>
         )}
 
-        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && (
+        {active === "pricing" && (
+          <section>
+            <PricingView />
+          </section>
+        )}
+
+        {active === "briefs" && (
+          <section>
+            <BriefsView />
+          </section>
+        )}
+
+        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && active !== "pricing" && active !== "briefs" && (
           <section>
             <div
               className="text-[var(--text-primary)] font-extrabold"
