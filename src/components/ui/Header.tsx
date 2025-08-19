@@ -9,38 +9,7 @@ interface CoBrandingProps {
   customerLogoSrc?: string;
 }
 
-const BrowserBar: React.FC = () => {
-  return (
-    <div className="w-full bg-white border-b border-[var(--border-light)]">
-      <div className="container-page flex items-center h-10 gap-3">
-        {/* System dots */}
-        <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-[#ff5f56] border border-black/10"></span>
-          <span className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-black/10"></span>
-          <span className="w-3 h-3 rounded-full bg-[#27c93f] border border-black/10"></span>
-        </div>
-        {/* Tabs mock */}
-        <div className="flex items-center gap-2 ml-2">
-          <div className="h-7 px-3 rounded-md bg-[var(--border-light)] text-[12px] flex items-center text-[var(--text-secondary)]">
-            <span className="w-3 h-3 mr-2 bg-[var(--text-tertiary)] rounded-sm"></span>
-            CQuel – Projects
-          </div>
-          <div className="h-7 px-3 rounded-md text-[12px] flex items-center text-[var(--text-tertiary)] hover:bg-[var(--border-light)]">+
-          </div>
-        </div>
-        {/* Address bar */}
-        <div className="ml-auto flex items-center gap-2 min-w-[300px] flex-1 max-w-xl">
-          <div className="flex-1 h-7 bg-[var(--border-light)] rounded-md border border-[var(--border-default)] px-3 text-[12px] text-[var(--text-secondary)] flex items-center">
-            <span className="w-3 h-3 mr-2 rounded-sm bg-[var(--brand-primary)]"></span>
-            cquel.io
-          </div>
-          <div className="w-7 h-7 rounded-md border border-[var(--border-default)] bg-white"></div>
-          <div className="w-7 h-7 rounded-md border border-[var(--border-default)] bg-white"></div>
-        </div>
-      </div>
-    </div>
-  );
-};
+
 
 const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc }) => {
   return (
@@ -87,9 +56,7 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
   );
 };
 
-export interface HeaderProps extends CoBrandingProps {}
-
-export const Header: React.FC<HeaderProps> = (props) => {
+export const Header: React.FC<CoBrandingProps> = (props) => {
   return (
     <header className="sticky top-0 z-50">
       <CoBrandingHeader {...props} />

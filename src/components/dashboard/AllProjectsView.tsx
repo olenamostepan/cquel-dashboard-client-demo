@@ -1,7 +1,6 @@
 import React from "react";
-import { Search, Filter, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 
 // Statistics Cards Component
 const StatisticsCards: React.FC = () => {
