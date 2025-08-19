@@ -85,38 +85,73 @@ const TenderCard: React.FC<{
   location: string;
   responsibility: 'your' | 'cquel' | 'supplier';
   status: string;
-  action: string;
   actionButton: string;
-}> = ({ projectName, location, responsibility, status, action, actionButton }) => {
+  solutionType: 'led' | 'solar' | 'heat-pumps' | 'ev-charging';
+}> = ({ projectName, location, responsibility, status, actionButton, solutionType }) => {
+  const getSolutionIcon = (type: string) => {
+    switch (type) {
+      case 'led':
+        return '/assets/choose supplier.svg';
+      case 'solar':
+        return '/assets/publishing.svg';
+      case 'heat-pumps':
+        return '/assets/pricing.svg';
+      case 'ev-charging':
+        return '/assets/New project.svg';
+      default:
+        return '/assets/choose supplier.svg';
+    }
+  };
+
   return (
-    <Card elevated className="p-6">
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[14px] font-bold text-[var(--text-primary)]">{projectName}</span>
-            <ExternalLink className="w-4 h-4 text-[var(--text-tertiary)]" />
-          </div>
-          <div className="text-[14px] text-[var(--text-secondary)] mb-3">{location}</div>
-          <div className="flex items-center gap-3 mb-3">
-            <ResponsibilityBadge type={responsibility} />
-          </div>
-          <div className="text-[14px] text-[var(--text-primary)] mb-3">{status}</div>
-          <div className="text-[12px] text-[var(--text-tertiary)]">{action}</div>
+    <div 
+      className="flex items-center justify-between p-4 border border-[var(--border-default)] rounded-lg bg-white"
+      style={{ height: "72px" }}
+    >
+      <div className="flex items-center gap-4 flex-1">
+        {/* Solution Type Icon */}
+        <div className="w-8 h-8 flex items-center justify-center">
+          <img
+            src={getSolutionIcon(solutionType)}
+            alt={solutionType}
+            className="w-8 h-8 object-contain"
+          />
         </div>
-        <div className="ml-4">
-          <Button variant="neutral" size="sm">
-            {actionButton}
-          </Button>
+        
+        {/* Project Info */}
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[14px] font-bold text-[var(--text-primary)]">{projectName}</span>
+            <ExternalLink className="w-3 h-3 text-[var(--text-tertiary)]" />
+          </div>
+          <div className="text-[12px] text-[var(--text-secondary)]">{location}</div>
+        </div>
+        
+        {/* Responsibility Badge */}
+        <div className="flex items-center">
+          <ResponsibilityBadge type={responsibility} />
+        </div>
+        
+        {/* Status */}
+        <div className="text-[14px] text-[var(--text-primary)] min-w-[120px]">
+          {status}
         </div>
       </div>
-    </Card>
+      
+      {/* Action Button */}
+      <div className="ml-4">
+        <Button variant="neutral" size="sm">
+          {actionButton}
+        </Button>
+      </div>
+    </div>
   );
 };
 
 // Search and Filter Bar Component
 const SearchFilterBar: React.FC = () => {
   return (
-    <div className="bg-white rounded-lg mb-6">
+    <div className="mb-6">
       <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
         {/* Search Input */}
         <div className="relative" style={{ width: "200px" }}>
@@ -170,24 +205,24 @@ const NeedsAttentionSection: React.FC = () => {
       location: "Berlin • AroundTown",
       responsibility: "your" as const,
       status: "Meeting with Supplier scheduled on 13:00 25 Aug 2025",
-      action: "Your action required",
-      actionButton: "View Supplier Info"
+      actionButton: "View Supplier Info",
+      solutionType: "led" as const
     },
     {
       projectName: "Birmingham Warehouse Solar",
       location: "Birmingham • LogisPark",
       responsibility: "your" as const,
       status: "Choosing Supplier",
-      action: "Review supplier responses",
-      actionButton: "Go to Tender results"
+      actionButton: "Go to Tender results",
+      solutionType: "solar" as const
     },
     {
       projectName: "Edinburgh Data Centre LED",
       location: "Edinburgh • ScotTech",
       responsibility: "your" as const,
       status: "Scheduling a meeting with Supplier",
-      action: "Coordinate meeting time",
-      actionButton: "View Supplier Info"
+      actionButton: "View Supplier Info",
+      solutionType: "led" as const
     }
   ];
 
@@ -211,16 +246,16 @@ const ActiveTendersSection: React.FC = () => {
       location: "Liverpool • MerseyCorp",
       responsibility: "supplier" as const,
       status: "Gathering Responses",
-      action: "Waiting for supplier action",
-      actionButton: "View Progress"
+      actionButton: "View Progress",
+      solutionType: "ev-charging" as const
     },
     {
       projectName: "Bristol Retail Heat Pumps",
       location: "Bristol • GreenSpace",
       responsibility: "supplier" as const,
       status: "Preparing Quotes",
-      action: "Supplier preparing response",
-      actionButton: "View Progress"
+      actionButton: "View Progress",
+      solutionType: "heat-pumps" as const
     }
   ];
 
@@ -244,16 +279,16 @@ const TenderingCompleteSection: React.FC = () => {
       location: "Newcastle • IndustrialPark",
       responsibility: "your" as const,
       status: "Meeting with Supplier happened on 25 Apr 2025",
-      action: "Tendering process completed",
-      actionButton: "Go to Tender results"
+      actionButton: "Go to Tender results",
+      solutionType: "solar" as const
     },
     {
       projectName: "Stuttgart Office Heat Pumps",
       location: "Berlin • AroundTown",
       responsibility: "your" as const,
       status: "Meeting with Supplier happened on 1 May 2025",
-      action: "Tendering process completed",
-      actionButton: "Go to Tender results"
+      actionButton: "Go to Tender results",
+      solutionType: "heat-pumps" as const
     }
   ];
 
@@ -287,11 +322,16 @@ export const TendersView: React.FC = () => {
         </div>
       </div>
       
-      <SearchFilterBar />
-      
-      <NeedsAttentionSection />
-      <ActiveTendersSection />
-      <TenderingCompleteSection />
+      <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
+        <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "var(--text-h5)" }}>
+          All Tenders
+        </h2>
+        <SearchFilterBar />
+        
+        <NeedsAttentionSection />
+        <ActiveTendersSection />
+        <TenderingCompleteSection />
+      </div>
     </div>
   );
 };
