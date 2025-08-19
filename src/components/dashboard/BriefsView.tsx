@@ -280,15 +280,6 @@ const BriefCard: React.FC<{ brief: Brief }> = ({ brief }) => {
         <div className="text-[14px] text-[var(--text-secondary)]">{brief.timestamp}</div>
       </div>
 
-      {/* Action Badge */}
-      <div className="w-[100px] mr-12 flex-shrink-0">
-        {brief.courtStatus ? (
-          <ResponsibilityBadge responsibility={brief.courtStatus} />
-        ) : (
-          <div className="h-6"></div>
-        )}
-      </div>
-
       {/* Action Button */}
       <div className="ml-3 flex-shrink-0">
         {brief.action ? (
