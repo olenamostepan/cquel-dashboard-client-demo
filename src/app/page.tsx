@@ -7,6 +7,7 @@ import WelcomeWidgets from "@/components/dashboard/WelcomeWidgets";
 import FocusActions from "@/components/dashboard/FocusActions";
 import AllProjectsView from "@/components/dashboard/AllProjectsView";
 import TendersView from "@/components/dashboard/TendersView";
+import SurveysView from "@/components/dashboard/SurveysView";
 
 export default function Home() {
   const [active, setActive] = React.useState("focus");
@@ -75,22 +76,17 @@ export default function Home() {
 
         {active === "tenders" && (
           <section>
-            <div
-              className="text-[var(--text-primary)] font-extrabold"
-              style={{
-                fontSize: "24px",
-                lineHeight: "32px",
-                paddingTop: "var(--Distance-32, 32px)",
-                paddingBottom: "var(--Distance-32, 32px)",
-              }}
-            >
-              Welcome back, Alex
-            </div>
             <TendersView />
           </section>
         )}
 
-        {active !== "focus" && active !== "all" && active !== "tenders" && (
+        {active === "surveys" && (
+          <section>
+            <SurveysView />
+          </section>
+        )}
+
+        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && (
           <section>
             <div
               className="text-[var(--text-primary)] font-extrabold"

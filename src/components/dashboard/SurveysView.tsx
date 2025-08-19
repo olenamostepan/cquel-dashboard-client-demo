@@ -1,42 +1,40 @@
 import React from "react";
-import { Search, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
-// Statistics Cards Component for Tenders
-const TenderStatisticsCards: React.FC = () => {
+// Statistics Cards Component for Surveys
+const SurveyStatisticsCards: React.FC = () => {
   return (
     <div className="flex gap-5 w-full h-full">
       <Card elevated className="p-3 flex-1 h-full">
         <div className="flex flex-col items-start h-full">
-          <div className="text-lg mb-auto">📊</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">12</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">Active tenders</div>
+          <div className="text-lg mb-auto">🔍</div>
+          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">2</div>
+          <div className="text-[14px] text-[var(--text-secondary)]">surveys scheduled</div>
+        </div>
+      </Card>
+      
+      <Card elevated className="p-3 flex-1 h-full">
+        <div className="flex flex-col items-start h-full">
+          <div className="text-lg mb-auto">✅</div>
+          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">3</div>
+          <div className="text-[14px] text-[var(--text-secondary)]">surveys done</div>
         </div>
       </Card>
       
       <Card elevated className="p-3 flex-1 h-full">
         <div className="flex flex-col items-start h-full">
           <div className="text-lg mb-auto">⏰</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">5.3</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">days avg response</div>
-          <div className="text-[9px] text-[var(--text-tertiary)] mt-1">Last 30 days</div>
-        </div>
-      </Card>
-      
-      <Card elevated className="p-3 flex-1 h-full">
-        <div className="flex flex-col items-start h-full">
-          <div className="text-lg mb-auto">⚡</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">78%</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">response rate</div>
-          <div className="text-[9px] text-[var(--text-tertiary)] mt-1">Industry avg: 65%</div>
+          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">3.2</div>
+          <div className="text-[14px] text-[var(--text-secondary)]">days avg to schedule</div>
         </div>
       </Card>
     </div>
   );
 };
 
-// Responsibility Badge Component (reused from AllProjectsView)
+// Responsibility Badge Component (reused from TendersView)
 const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = ({ type }) => {
   const styles = {
     your: {
@@ -78,8 +76,8 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
   );
 };
 
-// Tender Card Component
-const TenderCard: React.FC<{
+// Survey Card Component
+const SurveyCard: React.FC<{
   projectName: string;
   location: string;
   responsibility: 'your' | 'cquel' | 'supplier';
@@ -139,7 +137,7 @@ const TenderCard: React.FC<{
       
       {/* Action Button */}
       <div className="ml-3 flex-shrink-0">
-        <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
+        <Button variant="neutral" size="custom" className="w-[200px] whitespace-nowrap">
           {actionButton}
         </Button>
       </div>
@@ -156,7 +154,7 @@ const SearchFilterBar: React.FC = () => {
         <div className="relative" style={{ width: "200px" }}>
           <input
             type="text"
-            placeholder="Search tenders..."
+            placeholder="Search surveys..."
             className="w-full px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
             style={{ 
               height: "40px", 
@@ -186,7 +184,7 @@ const SearchFilterBar: React.FC = () => {
                 color: "var(--text-primary)"
               }}
             >
-              <span>Filter by: Next Step</span>
+              <span>Filter by: Status</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
@@ -198,117 +196,109 @@ const SearchFilterBar: React.FC = () => {
   );
 };
 
-// Needs Attention Section
-const NeedsAttentionSection: React.FC = () => {
-  const tenders = [
+// Ongoing Surveys Section
+const OngoingSurveysSection: React.FC = () => {
+  const surveys = [
     {
-      projectName: "Stuttgart Office LED",
-      location: "Berlin • AroundTown",
+      projectName: "Manchester Office HVAC",
+      location: "Manchester • TechHub",
       responsibility: "your" as const,
-      status: "Meeting with Supplier scheduled on 13:00 25 Aug 2025",
-      actionButton: "View Supplier",
-      solutionType: "led" as const
+      status: "Survey scheduled on 14:00 23 Aug 2025",
+      actionButton: "View Details",
+      solutionType: "heat-pumps" as const
     },
     {
       projectName: "Birmingham Warehouse Solar",
       location: "Birmingham • LogisPark",
       responsibility: "your" as const,
-      status: "Choosing Supplier",
-      actionButton: "Go to Results",
+      status: "Survey scheduled on 10:00 26 Aug 2025",
+      actionButton: "View Details",
       solutionType: "solar" as const
-    },
+    }
+  ];
+
+  return (
+    <div className="mb-8">
+      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Ongoing Surveys</h2>
+      <div className="space-y-4">
+        {surveys.map((survey, index) => (
+          <SurveyCard key={index} {...survey} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Pending Surveys Section
+const PendingSurveysSection: React.FC = () => {
+  const surveys = [
     {
       projectName: "Edinburgh Data Centre LED",
       location: "Edinburgh • ScotTech",
-      responsibility: "your" as const,
-      status: "Scheduling a meeting with Supplier",
-      actionButton: "View Supplier",
+      responsibility: "cquel" as const,
+      status: "Scheduling a survey",
+      actionButton: "Schedule Survey",
+      solutionType: "led" as const
+    },
+    {
+      projectName: "Stuttgart Office LED",
+      location: "Berlin • AroundTown",
+      responsibility: "cquel" as const,
+      status: "Scheduling a survey",
+      actionButton: "Schedule Survey",
       solutionType: "led" as const
     }
   ];
 
   return (
     <div className="mb-8">
-      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Needs Attention</h2>
+      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Pending Surveys</h2>
       <div className="space-y-4">
-        {tenders.map((tender, index) => (
-          <TenderCard key={index} {...tender} />
+        {surveys.map((survey, index) => (
+          <SurveyCard key={index} {...survey} />
         ))}
       </div>
     </div>
   );
 };
 
-// Active Tenders Section
-const ActiveTendersSection: React.FC = () => {
-  const tenders = [
+// Done Section
+const DoneSection: React.FC = () => {
+  const surveys = [
     {
-      projectName: "Liverpool Office EV Charging",
+      projectName: "Liverpool Office HVAC",
       location: "Liverpool • MerseyCorp",
-      responsibility: "supplier" as const,
-      status: "Gathering Responses",
-      actionButton: "View Progress",
-      solutionType: "ev-charging" as const
+      responsibility: "your" as const,
+      status: "Survey happened on 1 PM 25 Jun 2025",
+      actionButton: "Download survey document(s)",
+      solutionType: "heat-pumps" as const
     },
     {
-      projectName: "Bristol Retail Heat Pumps",
-      location: "Bristol • GreenSpace",
-      responsibility: "supplier" as const,
-      status: "Preparing Quotes",
-      actionButton: "View Progress",
+      projectName: "Liverpool Office HVAC",
+      location: "Liverpool • MerseyCorp",
+      responsibility: "your" as const,
+      status: "Survey happened on 1 PM 25 Jun 2025",
+      actionButton: "Download survey document(s)",
       solutionType: "heat-pumps" as const
     }
   ];
 
   return (
     <div className="mb-8">
-      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Active Tenders</h2>
+      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Done</h2>
       <div className="space-y-4">
-        {tenders.map((tender, index) => (
-          <TenderCard key={index} {...tender} />
+        {surveys.map((survey, index) => (
+          <SurveyCard key={index} {...survey} />
         ))}
       </div>
     </div>
   );
 };
 
-// Tendering Complete Section
-const TenderingCompleteSection: React.FC = () => {
-  const tenders = [
-    {
-      projectName: "Newcastle Facility Solar",
-      location: "Newcastle • IndustrialPark",
-      responsibility: "your" as const,
-      status: "Meeting with Supplier happened on 25 Apr 2025",
-      actionButton: "Go to Results",
-      solutionType: "solar" as const
-    },
-    {
-      projectName: "Stuttgart Office Heat Pumps",
-      location: "Berlin • AroundTown",
-      responsibility: "your" as const,
-      status: "Meeting with Supplier happened on 1 May 2025",
-      actionButton: "Go to Results",
-      solutionType: "heat-pumps" as const
-    }
-  ];
-
-  return (
-    <div className="mb-8">
-      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Tendering Complete</h2>
-      <div className="space-y-4">
-        {tenders.map((tender, index) => (
-          <TenderCard key={index} {...tender} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export const TendersView: React.FC = () => {
+export const SurveysView: React.FC = () => {
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
-      {/* Header with Statistics and Meeting Widget */}
+      {/* Header with Statistics and Next Survey Widget */}
       <div className="flex gap-6 justify-between">
         {/* Left Container - Title and Statistics Cards */}
         <div className="flex-1 flex flex-col">
@@ -316,62 +306,62 @@ export const TendersView: React.FC = () => {
             Welcome back, Alex
           </h2>
           <div className="flex gap-5 flex-1">
-            <TenderStatisticsCards />
+            <SurveyStatisticsCards />
           </div>
         </div>
         
-        {/* Right Container - Meeting Widget */}
+        {/* Right Container - Next Survey Widget */}
         <div>
           <Card elevated className="p-5" style={{ width: "450px" }}>
-              <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next meeting</div>
-              <div className="mt-3 rounded-lg border border-[#D2E3F2] bg-[#E8F1F8] p-5">
-                <div className="grid grid-cols-2 gap-6">
-                  {/* Left: icon on top, text below */}
-                  <div className="flex flex-col">
-                    <span className="text-[28px] leading-none">⏰</span>
-                    <div className="mt-4">
-                      <div className="text-[14px] text-[var(--text-secondary)]">Date & Time:</div>
-                      <div className="mt-2 text-[20px] font-extrabold text-[var(--text-primary)]">13:00 – 14:00</div>
-                      <div className="mt-1 text-[16px] font-semibold text-[var(--text-primary)]">21 Aug 2025</div>
-                    </div>
-                  </div>
-
-                  {/* Right: supplier + project */}
-                  <div className="min-w-0">
-                    <div className="text-[14px] text-[var(--text-secondary)]">Supplier:</div>
-                    <div className="mt-1 flex items-center gap-2">
-                      <div className="text-[16px] font-bold text-[var(--text-primary)] truncate">EcoTech Systems</div>
-                      <ExternalLink size={18} className="text-[var(--text-tertiary)] shrink-0" />
-                    </div>
-                    <div className="my-3 h-px bg-[var(--border-light)]" />
-                    <div className="text-[14px] text-[var(--text-secondary)]">Project:</div>
-                    <div className="mt-1 text-[14px] font-bold text-[var(--text-primary)] truncate">Munich Warehouse Solar</div>
-                    <div className="mt-1 text-[14px] text-[var(--text-secondary)] truncate">Munich • LogiCorp</div>
+            <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next survey</div>
+            <div className="mt-3 rounded-lg border border-[#D2E3F2] bg-[#E8F1F8] p-5">
+              <div className="grid grid-cols-2 gap-6">
+                {/* Left: icon on top, text below */}
+                <div className="flex flex-col">
+                  <span className="text-[28px] leading-none">🔍</span>
+                  <div className="mt-4">
+                    <div className="text-[14px] text-[var(--text-secondary)]">Date & Time:</div>
+                    <div className="mt-2 text-[20px] font-extrabold text-[var(--text-primary)]">13:00 – 14:00</div>
+                    <div className="mt-1 text-[16px] font-semibold text-[var(--text-primary)]">21 Aug 2025</div>
                   </div>
                 </div>
-              </div>
-            </Card>
-          </div>
-        </div>
 
-      {/* Main Content - All Tenders */}
+                {/* Right: supplier + project */}
+                <div className="min-w-0">
+                  <div className="text-[14px] text-[var(--text-secondary)]">Supplier:</div>
+                  <div className="mt-1 flex items-center gap-2">
+                    <div className="text-[16px] font-bold text-[var(--text-primary)] truncate">Solar House LTD</div>
+                    <ExternalLink size={18} className="text-[var(--text-tertiary)] shrink-0" />
+                  </div>
+                  <div className="my-3 h-px bg-[var(--border-light)]" />
+                  <div className="text-[14px] text-[var(--text-secondary)]">Project:</div>
+                  <div className="mt-1 text-[14px] font-bold text-[var(--text-primary)] truncate">Stuttgart Office LED</div>
+                  <div className="mt-1 text-[14px] text-[var(--text-secondary)] truncate">Berlin • AroundTown</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      {/* Main Content - All Surveys */}
       <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
         <h2 className="text-[20px] font-extrabold text-[var(--text-primary)] mb-6">
-          All Tenders
+          All Surveys
         </h2>
         
         {/* Search and Filter Bar */}
         <SearchFilterBar />
         
-        {/* Tender Sections */}
+        {/* Survey Sections */}
         <div className="space-y-6 mt-6">
-          <NeedsAttentionSection />
-          <ActiveTendersSection />
-          <TenderingCompleteSection />
+          <OngoingSurveysSection />
+          <PendingSurveysSection />
+          <DoneSection />
         </div>
       </div>
     </div>
   );
 };
 
-export default TendersView;
+export default SurveysView;

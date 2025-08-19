@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
 
 // Statistics Cards Component
 const StatisticsCards: React.FC = () => {
@@ -49,10 +50,10 @@ const CustomDropdown: React.FC<{
     <div className="relative">
       <button
         onClick={onToggle}
-        className="text-[14px] font-bold focus:outline-none flex items-center justify-between w-full"
+        className="text-[14px] font-bold focus:outline-none flex items-center justify-between w-full whitespace-nowrap"
         style={{ 
           display: "flex",
-          width: "148px",
+          width: "160px",
           padding: "var(--Distance-8, 8px) var(--Distance-12, 12px)",
           justifyContent: "space-between",
           alignItems: "center",
@@ -73,7 +74,7 @@ const CustomDropdown: React.FC<{
       {isOpen && (
         <div 
           className="absolute top-full left-0 right-0 mt-1 bg-white rounded-md shadow-lg z-10"
-          style={{ width: "148px" }}
+          style={{ width: "160px" }}
         >
           {options.map((option) => (
             <button
@@ -220,7 +221,7 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
   
   return (
     <span
-      className="px-3 py-1 rounded-full text-[12px] font-bold border"
+      className="px-2 py-0.5 rounded-full text-[12px] font-bold border whitespace-nowrap"
       style={{
         backgroundColor: style.background,
         color: style.text,
@@ -251,7 +252,7 @@ const ProjectsTable: React.FC = () => {
       nextStep: "Gathering responses",
       nextAction: "Preparing Quotes",
       responsibility: "cquel" as const,
-      action: "Go to Tender results"
+      action: "Go to Results"
     },
     {
       name: "Manchester Office HVAC",
@@ -260,7 +261,7 @@ const ProjectsTable: React.FC = () => {
       nextStep: "Preparing quotes",
       nextAction: "Choosing Supplier",
       responsibility: "supplier" as const,
-      action: "Go to Tender results"
+      action: "Go to Results"
     },
     {
       name: "Edinburgh Data Centre LED",
@@ -269,7 +270,7 @@ const ProjectsTable: React.FC = () => {
       nextStep: "Choosing Supplier",
       nextAction: "Meeting Supplier",
       responsibility: "your" as const,
-      action: "Go to Tender results"
+      action: "Go to Results"
     },
     {
       name: "Edinburgh Data Centre LED",
@@ -322,7 +323,7 @@ const ProjectsTable: React.FC = () => {
               <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[180px]">
                 Next step
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[140px]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[80px]">
                 Responsibility
               </th>
               <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[140px]">
@@ -351,28 +352,13 @@ const ProjectsTable: React.FC = () => {
                     <span className="text-[12px] text-[var(--text-tertiary)]">Next: {project.nextAction}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 w-[140px]">
+                <td className="px-6 py-4 w-[80px]">
                   <ResponsibilityBadge type={project.responsibility} />
                 </td>
                 <td className="px-6 py-4 w-[140px]">
-                  <button
-                    className="text-[14px] font-bold transition-colors"
-                    style={{
-                      display: "flex",
-                      height: "40px",
-                      width: "120px",
-                      padding: "0 var(--Distance-12, 12px)",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "var(--Distance-16, 16px)",
-                      borderRadius: "var(--CornerRadius, 8px)",
-                      border: "1px solid var(--Colours-BorderDark, #D3D7DC)",
-                      background: "var(--Colours-ContainerBgGrey, #F9FAFB)",
-                      color: "var(--text-primary)"
-                    }}
-                  >
+                  <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
                     {project.action}
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}

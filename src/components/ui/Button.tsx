@@ -7,7 +7,7 @@ export type ButtonVariant = "primary" | "secondary" | "ghost" | "neutral";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "custom";
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
@@ -27,7 +27,8 @@ export const Button: React.FC<ButtonProps> = ({
   
   const sizes = {
     sm: "px-3 h-8 text-[12px]",
-    md: "px-4 h-10 text-[14px]"
+    md: "px-4 h-10 text-[14px]",
+    custom: "px-3 h-[40px] text-[14px]"
   };
 
   const variants: Record<ButtonVariant, string> = {
