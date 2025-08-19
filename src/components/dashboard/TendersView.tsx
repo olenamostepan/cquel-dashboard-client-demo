@@ -2,7 +2,6 @@ import React from "react";
 import { Search, ExternalLink } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import WelcomeWidgets from "./WelcomeWidgets";
 
 // Statistics Cards Component for Tenders
 const TenderStatisticsCards: React.FC = () => {
@@ -315,10 +314,47 @@ export const TendersView: React.FC = () => {
         
         {/* Right side: Meeting Widget */}
         <div className="lg:col-span-1">
-          <WelcomeWidgets 
-            onViewMeetings={() => {}} 
-            onViewSurveys={() => {}}
-          />
+          <div className="bg-white border border-[var(--border-light)] rounded-lg shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] p-5">
+            <div className="flex items-start justify-between">
+              <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next meeting</div>
+              <a
+                className="text-[14px] font-extrabold cursor-pointer"
+                style={{ color: "var(--link-blue)" }}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                View all
+              </a>
+            </div>
+            <div className="mt-3 rounded-lg border border-[var(--border-light)] bg-[var(--page)] p-5">
+              <div className="grid grid-cols-2 gap-6">
+                {/* Left: icon on top, text below */}
+                <div className="flex flex-col">
+                  <span className="text-[28px] leading-none">⏰</span>
+                  <div className="mt-4">
+                    <div className="text-[14px] text-[var(--text-secondary)]">Date & Time:</div>
+                    <div className="mt-2 text-[20px] font-extrabold text-[var(--text-primary)]">13:00 – 14:00</div>
+                    <div className="mt-1 text-[16px] font-semibold text-[var(--text-primary)]">21 Aug 2025</div>
+                  </div>
+                </div>
+
+                {/* Right: supplier + project */}
+                <div className="min-w-0">
+                  <div className="text-[14px] text-[var(--text-secondary)]">Supplier:</div>
+                  <div className="mt-1 flex items-center gap-2">
+                    <div className="text-[16px] font-bold text-[var(--text-primary)] truncate">EcoTech Systems</div>
+                    <ExternalLink size={18} className="text-[var(--text-tertiary)] shrink-0" />
+                  </div>
+                  <div className="my-3 h-px bg-[var(--border-light)]" />
+                  <div className="text-[14px] text-[var(--text-secondary)]">Project:</div>
+                  <div className="mt-1 text-[14px] font-bold text-[var(--text-primary)] truncate">Munich Warehouse Solar</div>
+                  <div className="mt-1 text-[14px] text-[var(--text-secondary)] truncate">Munich • LogiCorp</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
