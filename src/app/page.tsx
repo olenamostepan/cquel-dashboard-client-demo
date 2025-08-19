@@ -50,14 +50,9 @@ export default function Home() {
               </div>
             </section>
 
-            <section>
-              <div className="text-[var(--text-primary)] font-extrabold" style={{ fontSize: "var(--text-h5)", lineHeight: "28px" }}>
-                Focus here now
-              </div>
-              <div className="mt-3">
-                <FocusActions />
-              </div>
-            </section>
+                    <section>
+          <FocusActions />
+        </section>
           </>
         )}
 

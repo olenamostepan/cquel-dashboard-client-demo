@@ -6,30 +6,30 @@ import Button from "@/components/ui/Button";
 // Statistics Cards Component for Tenders
 const TenderStatisticsCards: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-      <Card elevated className="p-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <Card elevated className="p-4">
         <div className="flex flex-col items-start">
-          <div className="text-2xl mb-2">📊</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">12</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">Active tenders</div>
+          <div className="text-xl mb-2">📊</div>
+          <div className="text-[20px] font-extrabold text-[var(--text-primary)]">12</div>
+          <div className="text-[12px] text-[var(--text-secondary)]">Active tenders</div>
         </div>
       </Card>
       
-      <Card elevated className="p-6">
+      <Card elevated className="p-4">
         <div className="flex flex-col items-start">
-          <div className="text-2xl mb-2">⏰</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">5.3</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">days avg response</div>
-          <div className="text-[12px] text-[var(--text-tertiary)] mt-1">Last 30 days</div>
+          <div className="text-xl mb-2">⏰</div>
+          <div className="text-[20px] font-extrabold text-[var(--text-primary)]">5.3</div>
+          <div className="text-[12px] text-[var(--text-secondary)]">days avg response</div>
+          <div className="text-[10px] text-[var(--text-tertiary)] mt-1">Last 30 days</div>
         </div>
       </Card>
       
-      <Card elevated className="p-6">
+      <Card elevated className="p-4">
         <div className="flex flex-col items-start">
-          <div className="text-2xl mb-2">⚡</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">78%</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">response rate</div>
-          <div className="text-[12px] text-[var(--text-tertiary)] mt-1">Industry avg: 65%</div>
+          <div className="text-xl mb-2">⚡</div>
+          <div className="text-[20px] font-extrabold text-[var(--text-primary)]">78%</div>
+          <div className="text-[12px] text-[var(--text-secondary)]">response rate</div>
+          <div className="text-[10px] text-[var(--text-tertiary)] mt-1">Industry avg: 65%</div>
         </div>
       </Card>
     </div>
@@ -90,15 +90,15 @@ const TenderCard: React.FC<{
   const getSolutionIcon = (type: string) => {
     switch (type) {
       case 'led':
-        return '/assets/choose supplier.svg';
+        return '/assets/LED.svg';
       case 'solar':
-        return '/assets/publishing.svg';
+        return '/assets/solar pv.svg';
       case 'heat-pumps':
-        return '/assets/pricing.svg';
+        return '/assets/heat pumps.svg';
       case 'ev-charging':
-        return '/assets/New project.svg';
+        return '/assets/ev charging.svg';
       default:
-        return '/assets/choose supplier.svg';
+        return '/assets/LED.svg';
     }
   };
 
@@ -109,37 +109,37 @@ const TenderCard: React.FC<{
     >
       <div className="flex items-center gap-4 flex-1">
         {/* Solution Type Icon */}
-        <div className="w-8 h-8 flex items-center justify-center">
+        <div className="w-14 h-14 flex items-center justify-center flex-shrink-0">
           <img
             src={getSolutionIcon(solutionType)}
             alt={solutionType}
-            className="w-8 h-8 object-contain"
+            className="w-14 h-14 object-contain"
           />
         </div>
         
         {/* Project Info */}
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[14px] font-bold text-[var(--text-primary)]">{projectName}</span>
-            <ExternalLink className="w-3 h-3 text-[var(--text-tertiary)]" />
+            <span className="text-[14px] font-bold text-[var(--text-primary)] truncate">{projectName}</span>
+            <ExternalLink className="w-3 h-3 text-[var(--text-tertiary)] flex-shrink-0" />
           </div>
-          <div className="text-[12px] text-[var(--text-secondary)]">{location}</div>
+          <div className="text-[12px] text-[var(--text-secondary)] truncate">{location}</div>
         </div>
         
         {/* Responsibility Badge */}
-        <div className="flex items-center">
+        <div className="flex items-center w-[140px] flex-shrink-0">
           <ResponsibilityBadge type={responsibility} />
         </div>
         
         {/* Status */}
-        <div className="text-[14px] text-[var(--text-primary)] min-w-[120px]">
+        <div className="text-[14px] text-[var(--text-primary)] w-[180px] flex-shrink-0">
           {status}
         </div>
       </div>
       
       {/* Action Button */}
-      <div className="ml-4">
-        <Button variant="neutral" size="sm">
+      <div className="ml-4 flex-shrink-0">
+        <Button variant="neutral" size="sm" className="w-[120px]">
           {actionButton}
         </Button>
       </div>
@@ -314,7 +314,7 @@ export const TendersView: React.FC = () => {
         
         {/* Right side: Meeting Widget */}
         <div className="lg:col-span-1">
-          <div className="bg-white border border-[var(--border-light)] rounded-lg shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] p-5">
+          <div className="bg-white border border-[var(--border-light)] rounded-lg shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] p-5" style={{ width: "450px" }}>
             <div className="flex items-start justify-between">
               <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next meeting</div>
               <a
@@ -328,7 +328,11 @@ export const TendersView: React.FC = () => {
                 View all
               </a>
             </div>
-            <div className="mt-3 rounded-lg border border-[var(--border-light)] bg-[var(--page)] p-5">
+            <div className="mt-3 p-5" style={{ 
+              borderRadius: "8px",
+              border: "1px solid var(--Colours-BorderBlue, #D2E3F2)",
+              background: "var(--Colours-BgBlue, #E8F1F8)"
+            }}>
               <div className="grid grid-cols-2 gap-6">
                 {/* Left: icon on top, text below */}
                 <div className="flex flex-col">
@@ -359,7 +363,7 @@ export const TendersView: React.FC = () => {
       </div>
       
       <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
-        <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "var(--text-h5)" }}>
+        <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
           All Tenders
         </h2>
         <SearchFilterBar />

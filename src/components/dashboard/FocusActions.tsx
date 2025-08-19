@@ -57,10 +57,10 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
 
 export const FocusActions: React.FC = () => {
   return (
-    <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
-      <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "var(--text-h5)" }}>
-        Focus here now
-      </h2>
+          <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
+        <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
+          Focus here now
+        </h2>
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <ActionCard

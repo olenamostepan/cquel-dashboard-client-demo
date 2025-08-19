@@ -301,31 +301,31 @@ const ProjectsTable: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
-      <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "var(--text-h5)" }}>
-        All Projects
-      </h2>
+          <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
+        <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
+          All Projects
+        </h2>
       <SearchFilterBar />
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-[#f9fafb]">
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[200px]">
                 Project Name
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[120px]">
                 Location
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[120px]">
                 Project type
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[180px]">
                 Next step
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[140px]">
                 Responsibility
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
+              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[140px]">
                 Actions
               </th>
             </tr>
@@ -333,38 +333,38 @@ const ProjectsTable: React.FC = () => {
           <tbody>
             {projects.map((project, index) => (
               <tr key={index} className="border-b border-[var(--border-default)] hover:bg-[#f9fafb]">
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 w-[200px]">
                   <div className="flex items-center gap-2">
-                    <span className="text-[14px] font-bold text-[var(--text-primary)]">{project.name}</span>
-                    <ExternalLink className="w-4 h-4 text-[var(--text-tertiary)]" />
+                    <span className="text-[14px] font-bold text-[var(--text-primary)] truncate">{project.name}</span>
+                    <ExternalLink className="w-4 h-4 text-[var(--text-tertiary)] flex-shrink-0" />
                   </div>
                 </td>
-                <td className="px-6 py-4 text-[14px] text-[var(--text-secondary)]">
+                <td className="px-6 py-4 text-[14px] text-[var(--text-secondary)] w-[120px]">
                   {project.location}
                 </td>
-                <td className="px-6 py-4 text-[14px] text-[var(--text-secondary)]">
+                <td className="px-6 py-4 text-[14px] text-[var(--text-secondary)] w-[120px]">
                   {project.type}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 w-[180px]">
                   <div className="flex flex-col">
                     <span className="text-[14px] text-[var(--text-primary)]">{project.nextStep}</span>
                     <span className="text-[12px] text-[var(--text-tertiary)]">Next: {project.nextAction}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 w-[140px]">
                   <ResponsibilityBadge type={project.responsibility} />
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 w-[140px]">
                   <button
                     className="text-[14px] font-bold transition-colors"
                     style={{
                       display: "flex",
                       height: "40px",
+                      width: "120px",
                       padding: "0 var(--Distance-12, 12px)",
                       justifyContent: "center",
                       alignItems: "center",
                       gap: "var(--Distance-16, 16px)",
-                      flex: "1 0 0",
                       borderRadius: "var(--CornerRadius, 8px)",
                       border: "1px solid var(--Colours-BorderDark, #D3D7DC)",
                       background: "var(--Colours-ContainerBgGrey, #F9FAFB)",
