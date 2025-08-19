@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="32" viewBox="0 0 180 32" fill="none">
+  <rect x="0.5" y="0.5" width="179" height="31" rx="8" fill="#F9FAFB" stroke="#D3D7DC"/>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" font-size="14" font-weight="600">
+    <text x="12" y="21" fill="#4D5761">Powered by</text>
+    <text x="92" y="21" fill="#29B273">CQuel</text>
+  </g>
+</svg>
+

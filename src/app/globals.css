@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --page: #f9fafb;
+  --container: #ffffff;
+  --text-primary: #1e2832;
+  --text-secondary: #4d5761;
+  --text-tertiary: #9da4ae;
+  --border-default: #d3d7dc;
+  --border-light: #f3f4f6;
+  --brand-primary: #29b273;
+  --brand-primary-50: #eaf8f1; /* light green background */
+  --link-blue: #1c75bc;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Map CSS variables to Tailwind tokens */
+  --color-page: var(--page);
+  --color-container: var(--container);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border-default);
+  --color-border-light: var(--border-light);
+  --color-primary: var(--brand-primary);
+  --color-primary-light: var(--brand-primary-50);
+  --color-link: var(--link-blue);
+
+  /* Typography tokens */
+  --text-h4: 24px;
+  --text-h5: 20px;
+  --text-h8: 14px;
+  --text-p6: 14px;
+  --font-sans: var(--font-wix);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base styles */
+html, body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-wix), system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Utility helpers */
+.container-page {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
