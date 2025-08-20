@@ -88,7 +88,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header 
         customerName="Energise" 
-        showBreadcrumbs={active === "project-detail"}
+        showBreadcrumbs={active === "project-detail" || active === "tender-results"}
         breadcrumbItems={active === "project-detail" ? [
           {
             label: "All Projects",
@@ -102,6 +102,16 @@ export default function Home() {
           {
             label: "Solar PV - Schenkendorfstraße"
           }
+        ] : active === "tender-results" ? [
+          {
+            label: "Tenders",
+            onClick: () => {
+              window.location.href = '/?tab=tenders';
+            }
+          },
+          {
+            label: "Solar PV - Schenkendorfstraße"
+          }
         ] : undefined}
         onLogoClick={() => {
           console.log('Logo clicked from main page!');
@@ -109,7 +119,7 @@ export default function Home() {
         }}
         onStartNewProject={handleStartNewProject}
       />
-      {active !== "project-detail" && (
+      {active !== "project-detail" && active !== "tender-results" && (
         <Navigation
           activeId={active}
           onChange={handleTabChange}

@@ -198,16 +198,6 @@ const TenderResultsView: React.FC = () => {
     <div className="space-y-6" style={{ marginTop: "32px" }}>
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 text-[14px] text-[var(--text-secondary)] mb-2">
-          <span 
-            className="cursor-pointer hover:text-[var(--text-primary)]"
-            onClick={() => window.location.href = '/?tab=tenders'}
-          >
-            Tenders
-          </span>
-          <span>&gt;</span>
-          <span className="text-[var(--text-primary)]">{data.projectName}</span>
-        </div>
         <h1 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-2">
           {data.projectName}
         </h1>
