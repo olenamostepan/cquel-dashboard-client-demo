@@ -10,11 +10,12 @@ interface CoBrandingProps {
   showBreadcrumbs?: boolean;
   breadcrumbItems?: { label: string; onClick?: () => void }[];
   onLogoClick?: () => void;
+  onStartNewProject?: () => void;
 }
 
 
 
-const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc, showBreadcrumbs, breadcrumbItems, onLogoClick }) => {
+const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc, showBreadcrumbs, breadcrumbItems, onLogoClick, onStartNewProject }) => {
   return (
     <div className="w-full bg-white border-b border-[var(--border-light)]">
       <div className="container-page flex items-center justify-between py-4">
@@ -82,7 +83,7 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="primary">Start new project</Button>
+          <Button variant="primary" onClick={onStartNewProject}>Start new project</Button>
           <Avatar name="Alex Johnson" size={36} />
         </div>
       </div>

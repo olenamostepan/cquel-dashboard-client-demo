@@ -11,9 +11,34 @@ import SurveysView from "@/components/dashboard/SurveysView";
 import PricingView from "@/components/dashboard/PricingView";
 import BriefsView from "@/components/dashboard/BriefsView";
 import ProjectDetailView from "@/components/project/ProjectDetailView";
+import UploadModal from "@/components/upload/UploadModal";
+import SuccessModal from "@/components/upload/SuccessModal";
 
 export default function Home() {
   const [active, setActive] = React.useState("focus");
+  const [isUploadModalOpen, setIsUploadModalOpen] = React.useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false);
+
+  const handleStartNewProject = () => {
+    setIsUploadModalOpen(true);
+  };
+
+  const handleUploadSuccess = (files: Array<{
+    id: string;
+    name: string;
+    size: number;
+    type: string;
+    uploadedAt: Date;
+  }>) => {
+    setIsUploadModalOpen(false);
+    setIsSuccessModalOpen(true);
+  };
+
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalOpen(false);
+    // Navigate to briefs tab to show the upload
+    setActive("briefs");
+  };
 
   // Check for URL parameters on component mount
   React.useEffect(() => {
@@ -65,6 +90,7 @@ export default function Home() {
           console.log('Logo clicked from main page!');
           setActive('focus');
         }}
+        onStartNewProject={handleStartNewProject}
       />
       {active !== "project-detail" && (
         <Navigation
@@ -176,6 +202,21 @@ export default function Home() {
           </section>
         )}
       </main>
+
+      {/* Upload Modal */}
+      <UploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onSuccess={handleUploadSuccess}
+      />
+
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={handleSuccessModalClose}
+        fileCount={1}
+        userEmail="alex.johnson@company.com"
+      />
     </div>
   );
 }

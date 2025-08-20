@@ -3,6 +3,10 @@ import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import ResponsibilityBadge from "./ResponsibilityBadge";
+import UploadModal from "@/components/upload/UploadModal";
+import SuccessModal from "@/components/upload/SuccessModal";
+import SuccessBanner from "@/components/upload/SuccessBanner";
+import DocumentUploadsSection from "@/components/upload/DocumentUploadsSection";
 
 // Brief Interface
 interface Brief {
@@ -17,11 +21,11 @@ interface Brief {
 }
 
 // Briefs Metrics Section
-const BriefsMetricsSection: React.FC = () => {
+const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onStartNewProject }) => {
   return (
-    <div className="grid grid-cols-4 gap-6 mb-8">
+    <div className="flex gap-6 mb-8">
       {/* Generated Briefs */}
-      <Card elevated className="p-6">
+      <Card elevated className="p-6" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">📝</div>
           <div className="text-[24px] font-extrabold text-[var(--text-primary)]">12</div>
@@ -30,7 +34,7 @@ const BriefsMetricsSection: React.FC = () => {
       </Card>
       
       {/* Optimised Briefs */}
-      <Card elevated className="p-6">
+      <Card elevated className="p-6" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">📈</div>
           <div className="text-[24px] font-extrabold text-[var(--text-primary)]">78%</div>
@@ -39,7 +43,7 @@ const BriefsMetricsSection: React.FC = () => {
       </Card>
       
       {/* Published Briefs */}
-      <Card elevated className="p-6">
+      <Card elevated className="p-6" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">✅</div>
           <div className="text-[24px] font-extrabold text-[var(--text-primary)]">5.3</div>
@@ -49,6 +53,7 @@ const BriefsMetricsSection: React.FC = () => {
       
       {/* Creating Brief CTA */}
       <Card elevated className="p-6" style={{
+        width: "450px",
         background: "var(--Colours-BgGreen, #EAF8F1)",
         border: "1px solid var(--Colours-BorderGreen, #D4F0E3)"
       }}>
@@ -62,10 +67,7 @@ const BriefsMetricsSection: React.FC = () => {
             variant="primary" 
             className="w-full"
             style={{ background: "#29b273" }}
-            onClick={() => {
-              const briefBuilderUrl = `https://cquel-brief-builder.vercel.app/?userId=456`;
-              window.open(briefBuilderUrl, '_blank');
-            }}
+            onClick={onStartNewProject}
           >
             Start new project
           </Button>
@@ -512,6 +514,56 @@ const PublishedBriefsSection: React.FC = () => {
 };
 
 export const BriefsView: React.FC = () => {
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [showSuccessBanner, setShowSuccessBanner] = useState(false);
+  const [uploads, setUploads] = useState<Array<{
+    id: string;
+    files: Array<{
+      id: string;
+      name: string;
+      size: number;
+      type: string;
+      uploadedAt: Date;
+    }>;
+    status: 'uploading' | 'processing' | 'completed' | 'error';
+    uploadedAt: Date;
+    userId: string;
+  }>>([]);
+
+  const handleStartNewProject = () => {
+    setIsUploadModalOpen(true);
+  };
+
+  const handleUploadSuccess = (files: Array<{
+    id: string;
+    name: string;
+    size: number;
+    type: string;
+    uploadedAt: Date;
+  }>) => {
+    const newUpload = {
+      id: Math.random().toString(36).substr(2, 9),
+      files,
+      status: 'processing' as const,
+      uploadedAt: new Date(),
+      userId: '456'
+    };
+
+    setUploads(prev => [newUpload, ...prev]);
+    setIsUploadModalOpen(false);
+    setIsSuccessModalOpen(true);
+  };
+
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalOpen(false);
+    setShowSuccessBanner(true);
+  };
+
+  const handleSuccessBannerDismiss = () => {
+    setShowSuccessBanner(false);
+  };
+
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
       {/* Header */}
@@ -521,10 +573,15 @@ export const BriefsView: React.FC = () => {
         </h2>
       </div>
 
-
+      {/* Success Banner */}
+      <SuccessBanner 
+        isVisible={showSuccessBanner}
+        onDismiss={handleSuccessBannerDismiss}
+        fileCount={uploads.length > 0 ? uploads[0].files.length : 0}
+      />
 
       {/* Metrics Section */}
-      <BriefsMetricsSection />
+      <BriefsMetricsSection onStartNewProject={handleStartNewProject} />
 
       {/* Main Content */}
       <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
@@ -537,12 +594,28 @@ export const BriefsView: React.FC = () => {
         
         {/* Brief Sections */}
         <div className="space-y-8">
+          <DocumentUploadsSection uploads={uploads} />
           <OptimisedBriefsSection />
           <GeneratedBriefsSection />
           <UploadedPlansSection />
           <PublishedBriefsSection />
         </div>
       </div>
+
+      {/* Upload Modal */}
+      <UploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onSuccess={handleUploadSuccess}
+      />
+
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={handleSuccessModalClose}
+        fileCount={uploads.length > 0 ? uploads[0].files.length : 0}
+        userEmail="alex.johnson@company.com"
+      />
     </div>
   );
 };
