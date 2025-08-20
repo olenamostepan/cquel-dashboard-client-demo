@@ -366,8 +366,25 @@ const ProjectsTable: React.FC = () => {
                 </td>
                 {project.action && (
                   <td className="px-6 py-4 w-[140px]">
-                    <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
-                      {project.action}
+                    <Button 
+                      variant="neutral" 
+                      size="custom" 
+                      className="w-[140px] whitespace-nowrap"
+                      onClick={() => {
+                        if (project.action === "Go to Brief") {
+                          window.open("https://cquel-brief-builder.vercel.app/?briefId=4&userId=456", "_blank");
+                        } else if (project.action === "Go to Results") {
+                          window.location.href = "/?tab=tender-results";
+                        } else if (project.action === "Go to Tenders") {
+                          window.location.href = "/?tab=tenders";
+                        } else if (project.action === "Go to Scheduling") {
+                          window.location.href = "/?tab=surveys";
+                        } else if (project.action === "Go to Pricing") {
+                          window.location.href = "/?tab=pricing";
+                        }
+                      }}
+                    >
+                      {project.action === "Go to Brief" ? "Optimise Brief" : project.action}
                     </Button>
                   </td>
                 )}
