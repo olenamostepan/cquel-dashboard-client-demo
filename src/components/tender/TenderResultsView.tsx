@@ -101,14 +101,14 @@ const FilterTabs: React.FC<{
   onFilterChange: (filter: 'price' | 'quality' | 'speed') => void 
 }> = ({ activeFilter, onFilterChange }) => {
   return (
-    <div>
-      <div className="text-[14px] text-[var(--text-secondary)] mb-3">Filter by:</div>
+    <div className="flex items-center gap-3">
+      <div className="text-[14px] text-[var(--text-secondary)]">Filter by:</div>
       <div className="flex gap-2">
         <button
           onClick={() => onFilterChange('price')}
           className={`px-4 py-2 rounded-lg text-[14px] font-bold transition-colors ${
             activeFilter === 'price'
-              ? 'bg-[#29b273] text-white'
+              ? 'bg-white text-[#29b273] border border-[#29b273]'
               : 'bg-[var(--Colours-ContainerBgGrey,#F9FAFB)] text-[var(--text-primary)] border border-[var(--Colours-BorderDark,#D3D7DC)]'
           }`}
         >
@@ -118,7 +118,7 @@ const FilterTabs: React.FC<{
           onClick={() => onFilterChange('quality')}
           className={`px-4 py-2 rounded-lg text-[14px] font-bold transition-colors ${
             activeFilter === 'quality'
-              ? 'bg-[#29b273] text-white'
+              ? 'bg-white text-[#29b273] border border-[#29b273]'
               : 'bg-[var(--Colours-ContainerBgGrey,#F9FAFB)] text-[var(--text-primary)] border border-[var(--Colours-BorderDark,#D3D7DC)]'
           }`}
         >
@@ -128,7 +128,7 @@ const FilterTabs: React.FC<{
           onClick={() => onFilterChange('speed')}
           className={`px-4 py-2 rounded-lg text-[14px] font-bold transition-colors ${
             activeFilter === 'speed'
-              ? 'bg-[#29b273] text-white'
+              ? 'bg-white text-[#29b273] border border-[#29b273]'
               : 'bg-[var(--Colours-ContainerBgGrey,#F9FAFB)] text-[var(--text-primary)] border border-[var(--Colours-BorderDark,#D3D7DC)]'
           }`}
         >
@@ -142,43 +142,53 @@ const FilterTabs: React.FC<{
 // Supplier Card Component
 const SupplierCard: React.FC<{ supplier: Supplier }> = ({ supplier }) => {
   return (
-    <div className="bg-[#f8fafc] rounded-lg p-4 shadow-sm border border-[var(--Colours-BorderLight,#F3F4F6)]">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-[var(--Colours-BorderLight,#F3F4F6)]">
-            {supplier.logo ? (
-              <img
-                src={supplier.logo}
-                alt={`${supplier.name} logo`}
-                className="w-8 h-8 object-contain"
-                onError={(e) => {
-                  // Fallback to text if logo fails to load
-                  (e.currentTarget as HTMLImageElement).style.display = 'none';
-                  const parent = e.currentTarget.parentElement;
-                  if (parent) {
-                    parent.innerHTML = `<span class="text-[10px] font-bold text-[var(--text-primary)] text-center leading-tight">${supplier.logoText}</span>`;
-                  }
-                }}
-              />
-            ) : (
-              <span className="text-[10px] font-bold text-[var(--text-primary)] text-center leading-tight">
-                {supplier.logoText}
-              </span>
-            )}
-          </div>
-          <div>
-            <div className="text-[14px] font-bold text-[var(--text-primary)]">
-              {supplier.name}
-            </div>
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-[var(--Colours-BorderLight,#F3F4F6)]">
+      <div className="flex flex-col h-full">
+        {/* Logo */}
+        <div className="flex justify-center mb-4">
+          {supplier.logo ? (
+            <img
+              src={supplier.logo}
+              alt={`${supplier.name} logo`}
+              className="h-[56px] w-auto object-contain"
+              onError={(e) => {
+                // Fallback to text if logo fails to load
+                (e.currentTarget as HTMLImageElement).style.display = 'none';
+                const parent = e.currentTarget.parentElement;
+                if (parent) {
+                  parent.innerHTML = `<span class="text-[14px] font-bold text-[var(--text-primary)] text-center leading-tight">${supplier.logoText}</span>`;
+                }
+              }}
+            />
+          ) : (
+            <span className="text-[14px] font-bold text-[var(--text-primary)] text-center leading-tight">
+              {supplier.logoText}
+            </span>
+          )}
+        </div>
+        
+        {/* Company Name */}
+        <div className="text-center mb-4">
+          <div className="text-[14px] font-bold text-[var(--text-primary)]">
+            {supplier.name}
           </div>
         </div>
-      </div>
-      <div className="text-right">
-        <div className="text-[24px] font-bold text-[var(--text-primary)]">
-          {supplier.overallScore}
+        
+        {/* Score */}
+        <div className="text-center mb-6">
+          <div className="text-[24px] font-bold text-[var(--text-primary)]">
+            {supplier.overallScore}
+          </div>
+          <div className="text-[12px] text-[var(--text-secondary)]">
+            Overall Score
+          </div>
         </div>
-        <div className="text-[12px] text-[var(--text-secondary)]">
-          Overall Score
+        
+        {/* Contact Button */}
+        <div className="mt-auto">
+          <button className="w-full inline-flex items-center justify-center rounded-md text-[14px] font-bold leading-[20px] transition-colors px-4 h-10 text-[14px] bg-[var(--Colours-ContainerBgGrey,#F9FAFB)] text-[var(--text-primary)] border border-[var(--Colours-BorderDark,#D3D7DC)] hover:bg-[#eceff3]">
+            Contact Supplier
+          </button>
         </div>
       </div>
     </div>
@@ -216,25 +226,23 @@ const TenderResultsView: React.FC = () => {
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
       {/* Header Container */}
-      <div className="bg-white rounded-lg border border-[var(--Colours-BorderLight,#F3F4F6)] p-6">
-        <div className="flex items-center justify-between">
-          {/* Name + Address */}
-          <div>
-            <h1 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-2">
-              {data.projectName}
-            </h1>
-            <p className="text-[14px] text-[var(--text-secondary)]">
-              {data.projectLocation}
-            </p>
-          </div>
-          
-          {/* Filters */}
-          <div>
-            <FilterTabs 
-              activeFilter={data.activeFilter} 
-              onFilterChange={handleFilterChange} 
-            />
-          </div>
+      <div className="flex items-center justify-between">
+        {/* Name + Address */}
+        <div>
+          <h1 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-2">
+            {data.projectName}
+          </h1>
+          <p className="text-[14px] text-[var(--text-secondary)]">
+            {data.projectLocation}
+          </p>
+        </div>
+        
+        {/* Filters */}
+        <div>
+          <FilterTabs 
+            activeFilter={data.activeFilter} 
+            onFilterChange={handleFilterChange} 
+          />
         </div>
       </div>
 
