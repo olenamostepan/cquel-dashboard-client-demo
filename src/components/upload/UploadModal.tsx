@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import { X, Upload, File, Trash2 } from "lucide-react";
+import { Upload, File, Trash2 } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 interface UploadedFile {

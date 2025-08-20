@@ -1,6 +1,5 @@
 import React from "react";
-import { ChevronRight, Check, Zap, ExternalLink } from "lucide-react";
-import Card from "@/components/ui/Card";
+import { ChevronRight, Check, Zap } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ResponsibilityBadge from "@/components/dashboard/ResponsibilityBadge";
 
@@ -312,114 +311,7 @@ const FocusHereSection: React.FC<{ activeTab: string; onTabChange: (tab: string)
   );
 };
 
-// Coming Up Next Section
-const ComingUpNextSection: React.FC = () => {
-  const nextSteps: ProjectStep[] = [
-    {
-      id: "publishing-brief",
-      title: "Publishing Brief",
-      description: "Publish your optimised brief for suppliers",
-      stepNumber: 2,
-      courtStatus: "your",
-      dependency: "After: Optimising Brief"
-    },
-    {
-      id: "gathering-responses",
-      title: "Gathering Responses",
-      description: "Collect responses from interested suppliers",
-      stepNumber: 3,
-      courtStatus: "cquel",
-      dependency: "After: Publishing Brief"
-    },
-    {
-      id: "preparing-quotes",
-      title: "Preparing Quotes",
-      description: "Suppliers prepare detailed quotes",
-      stepNumber: 4,
-      courtStatus: "supplier",
-      dependency: "After: Gathering Responses"
-    },
-    {
-      id: "choosing-supplier",
-      title: "Choosing Supplier",
-      description: "Select the best supplier for your project",
-      stepNumber: 5,
-      courtStatus: "your",
-      dependency: "After: Preparing Quotes"
-    },
-    {
-      id: "meeting-supplier",
-      title: "Meeting Supplier",
-      description: "Meet with your chosen supplier",
-      stepNumber: 6,
-      courtStatus: "your",
-      dependency: "After: Choosing Supplier"
-    },
-    {
-      id: "scheduling-survey",
-      title: "Scheduling Survey",
-      description: "Schedule site survey with supplier",
-      stepNumber: 7,
-      courtStatus: "cquel",
-      dependency: "After: Meeting Supplier"
-    },
-    {
-      id: "finalising-price",
-      title: "Finalising Price",
-      description: "Negotiate and finalise pricing",
-      stepNumber: 8,
-      courtStatus: "your",
-      dependency: "After: Survey"
-    },
-    {
-      id: "contract-signing",
-      title: "Contract Signing",
-      description: "Sign final contract with supplier",
-      stepNumber: 9,
-      courtStatus: "your",
-      dependency: "After: Finalising Price"
-    }
-  ];
 
-  return (
-    <div className="mb-8">
-      <h2 className="text-[20px] font-extrabold text-[var(--text-primary)] mb-6">Coming Up Next</h2>
-      
-      <div className="space-y-3">
-        {nextSteps.map((step) => (
-          <Card key={step.id} elevated className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4 flex-1">
-                <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                  <span className="text-sm font-bold text-gray-600">{step.stepNumber}</span>
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1">
-                    <h3 className="text-[16px] font-bold text-[var(--text-primary)]">{step.title}</h3>
-                    <ResponsibilityBadge responsibility={step.courtStatus} />
-                  </div>
-                  
-                  <p className="text-[14px] text-[var(--text-secondary)] mb-1">
-                    {step.description}
-                  </p>
-                  
-                  <p className="text-[12px] text-[var(--text-tertiary)]">
-                    {step.dependency}
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex-shrink-0">
-                <ChevronRight size={20} className="text-gray-400" />
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 // Tab Bar Component
 const TabBar: React.FC<{ activeTab: string; onTabChange: (tab: string) => void }> = ({ activeTab, onTabChange }) => {

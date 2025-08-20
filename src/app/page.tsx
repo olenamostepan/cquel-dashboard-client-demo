@@ -25,7 +25,7 @@ export default function Home() {
     setIsUploadModalOpen(true);
   };
 
-  const handleUploadSuccess = (files: Array<{
+  const handleUploadSuccess = (_files: Array<{
     id: string;
     name: string;
     size: number;
@@ -55,7 +55,7 @@ export default function Home() {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const tabParam = urlParams.get('tab');
-      const projectIdParam = urlParams.get('projectId');
+      const _projectIdParam = urlParams.get('projectId');
       
       if (tabParam && ['focus', 'all', 'briefs', 'tenders', 'surveys', 'pricing', 'project-detail', 'tender-results'].includes(tabParam)) {
         setActive(tabParam);

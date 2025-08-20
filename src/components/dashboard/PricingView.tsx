@@ -131,7 +131,7 @@ interface PricingCardProps {
   projectName: string;
   location: string;
   responsibility?: "your" | "supplier" | "accepted";
-  fileName: string;
+  _fileName: string;
   status: string;
   actionButton?: string;
   showDropdown?: boolean;
@@ -145,7 +145,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
   projectName, 
   location, 
   responsibility, 
-  fileName, 
+  _fileName, 
   status, 
   actionButton,
   showDropdown = false,
@@ -272,7 +272,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 // Search and Filter Bar Component
 const SearchFilterBar: React.FC = () => {
   const [statusOpen, setStatusOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [_selectedStatus, setSelectedStatus] = useState<string>("");
 
   const statusOptions = [
     { value: "needs-attention", label: "Needs Attention" },
@@ -352,7 +352,7 @@ const NeedsAttentionSection: React.FC = () => {
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "your" as const,
-      fileName: "Pricing Pack.zip from Heat Pumps LTD",
+      _fileName: "Pricing Pack.zip from Heat Pumps LTD",
       status: "Ready for your review",
       showDropdown: true,
       solutionType: "heat-pumps" as const
@@ -379,7 +379,7 @@ const ActiveProjectsSection: React.FC = () => {
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "supplier" as const,
-      fileName: "Pricing Pack.zip from Heat Pumps LTD",
+      _fileName: "Pricing Pack.zip from Heat Pumps LTD",
       status: "Awaiting revised quote",
       solutionType: "heat-pumps" as const
     },
@@ -388,7 +388,7 @@ const ActiveProjectsSection: React.FC = () => {
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "supplier" as const,
-      fileName: "Pricing Pack.zip from Heat Pumps LTD",
+      _fileName: "Pricing Pack.zip from Heat Pumps LTD",
       status: "Preparing detailed breakdown",
       solutionType: "heat-pumps" as const
     }
@@ -414,7 +414,7 @@ const AcceptedSection: React.FC = () => {
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "accepted" as const,
-      fileName: "Pricing Pack.zip from Heat Pumps LTD",
+      _fileName: "Pricing Pack.zip from Heat Pumps LTD",
       status: "Accepted",
       solutionType: "heat-pumps" as const
     }

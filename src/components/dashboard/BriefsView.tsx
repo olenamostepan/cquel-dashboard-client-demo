@@ -192,7 +192,7 @@ const SearchFilterBar: React.FC = () => {
           placeholder="Court"
           isOpen={courtOpen}
           onToggle={() => setCourtOpen(!courtOpen)}
-          onSelect={(value, label) => {
+          onSelect={(value, _label) => {
             setSelectedCourt(value);
             setCourtOpen(false);
           }}
@@ -205,7 +205,7 @@ const SearchFilterBar: React.FC = () => {
           placeholder="Solution Type"
           isOpen={solutionOpen}
           onToggle={() => setSolutionOpen(!solutionOpen)}
-          onSelect={(value, label) => {
+          onSelect={(value, _label) => {
             setSelectedSolution(value);
             setSolutionOpen(false);
           }}
@@ -218,7 +218,7 @@ const SearchFilterBar: React.FC = () => {
           placeholder="Next Step"
           isOpen={nextStepOpen}
           onToggle={() => setNextStepOpen(!nextStepOpen)}
-          onSelect={(value, label) => {
+          onSelect={(value, _label) => {
             setSelectedNextStep(value);
             setNextStepOpen(false);
           }}
@@ -398,85 +398,7 @@ const GeneratedBriefsSection: React.FC = () => {
   );
 };
 
-// Uploaded Plans Section
-const UploadedPlansSection: React.FC = () => {
-  const uploadedPlans = [
-    {
-      id: "upload-1",
-      name: "New Upload",
-      location: "Documents uploaded at 12:00 21 Aug 2025",
-      fileCount: 5,
-      status: "Generating",
-      courtStatus: "cquel" as const
-    },
-    {
-      id: "upload-2", 
-      name: "New Upload",
-      location: "Documents uploaded at 14:30 20 Aug 2025",
-      fileCount: 3,
-      status: "Generating",
-      courtStatus: "cquel" as const
-    }
-  ];
 
-  return (
-    <div className="mb-8">
-      <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Uploaded Plans ({uploadedPlans.length})</h2>
-      <div className="space-y-2">
-        {uploadedPlans.map((plan) => (
-          <div key={plan.id} className="flex items-center justify-between p-4 bg-white rounded-lg border" style={{ 
-            height: "72px",
-            borderRadius: "var(--CornerRadius, 8px)",
-            border: "1px solid var(--Colours-BorderDark, #D3D7DC)",
-            background: "var(--Colours-ContainerBg, #FFF)"
-          }}>
-            {/* Document Icon */}
-            <div className="w-14 h-14 flex items-center justify-center mr-2 flex-shrink-0">
-              <img
-                src="/assets/Documents pack.svg"
-                alt=""
-                className="w-14 h-14 object-contain"
-              />
-            </div>
-
-            {/* Project Info */}
-            <div className="flex-1 min-w-0 max-w-[200px] mr-32">
-              <div className="flex items-center gap-2 mb-1">
-                <div 
-                  className="text-[14px] font-bold text-[var(--text-primary)] truncate cursor-pointer hover:text-[var(--brand-primary)]"
-                  onClick={() => {
-                    // Navigate to project detail page
-                    window.location.href = `/?tab=project-detail&projectId=${plan.id}&sourceTab=briefs`;
-                  }}
-                >
-                  {plan.name}
-                </div>
-                <ExternalLink size={16} className="text-[var(--text-tertiary)] shrink-0" />
-              </div>
-              <div className="text-[12px] text-[var(--text-secondary)] truncate">{plan.location}</div>
-            </div>
-
-            {/* Responsibility Badge */}
-            <div className="w-[100px] mr-12 flex-shrink-0">
-              <ResponsibilityBadge responsibility={plan.courtStatus} />
-            </div>
-
-            {/* Status */}
-            <div className="flex-1 min-w-0 max-w-[280px] mr-12">
-              <div className="text-[14px] text-[var(--text-secondary)]">{plan.status}</div>
-              <div className="text-[12px] text-[var(--text-tertiary)]">File counts: {plan.fileCount}</div>
-            </div>
-
-            {/* No Action Button - Empty space */}
-            <div className="ml-3 flex-shrink-0">
-              <div className="w-[140px]"></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 // Published Briefs Section
 const PublishedBriefsSection: React.FC = () => {

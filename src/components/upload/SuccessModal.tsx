@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Check, FileText, Mail } from "lucide-react";
+import { Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 interface SuccessModalProps {

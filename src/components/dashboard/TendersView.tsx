@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
