@@ -188,7 +188,6 @@ const formatCurrencyWithDecimals = (amount: number) => {
 
 // Main Tender Results Component
 const TenderResultsView: React.FC = () => {
-  console.log('TenderResultsView is rendering');
   const [data, setData] = useState<TenderResults>(tenderData);
 
   const handleFilterChange = (filter: 'price' | 'quality' | 'speed') => {

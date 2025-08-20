@@ -91,9 +91,9 @@ const TenderCard: React.FC<{
   const getSolutionIcon = (type: string) => {
     switch (type) {
       case 'led':
-        return '/assets/LED.svg';
+        return '/assets/led.svg';
       case 'solar':
-        return '/assets/solar pv.svg';
+        return '/assets/solar.svg';
       case 'heat-pumps':
         return '/assets/heat pumps.svg';
       case 'ev-charging':

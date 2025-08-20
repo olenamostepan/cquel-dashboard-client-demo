@@ -158,15 +158,15 @@ const PricingCard: React.FC<PricingCardProps> = ({
   const getSolutionIcon = (type?: string) => {
     switch (type) {
       case "solar":
-        return "/assets/solar pv.svg";
+        return "/assets/solar.svg";
       case "heat-pumps":
         return "/assets/heat pumps.svg";
       case "led":
-        return "/assets/LED.svg";
+        return "/assets/led.svg";
       case "ev-charging":
         return "/assets/ev charging.svg";
       default:
-        return "/assets/solar pv.svg"; // default fallback
+        return "/assets/solar.svg"; // default fallback
     }
   };
 

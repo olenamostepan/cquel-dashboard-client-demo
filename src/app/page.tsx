@@ -57,14 +57,10 @@ export default function Home() {
       const tabParam = urlParams.get('tab');
       const projectIdParam = urlParams.get('projectId');
       
-      console.log('URL params:', { tabParam, projectIdParam, currentActive: active });
-      
       if (tabParam && ['focus', 'all', 'briefs', 'tenders', 'surveys', 'pricing', 'project-detail', 'tender-results'].includes(tabParam)) {
-        console.log('Setting active tab to:', tabParam);
         setActive(tabParam);
       } else {
         // Default to focus if no tab parameter or invalid tab
-        console.log('No valid tab param, defaulting to focus');
         setActive('focus');
       }
     } catch (error) {
