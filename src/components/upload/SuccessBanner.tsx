@@ -39,7 +39,7 @@ export const SuccessBanner: React.FC<SuccessBannerProps> = ({
         <div className="flex items-center gap-3">
           <FileText className="w-5 h-5 text-green-600" />
           <div className="text-sm text-gray-900">
-            🎉 Documents uploaded successfully! We'll create comprehensive brief(s) and notify you when it's ready for review (typically 2-3 business days).
+            🎉 Documents uploaded successfully! We&apos;ll create comprehensive brief(s) and notify you when it&apos;s ready for review (typically 2-3 business days).
           </div>
         </div>
         <button

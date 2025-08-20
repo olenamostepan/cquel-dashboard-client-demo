@@ -78,13 +78,14 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
 
 // Survey Card Component
 const SurveyCard: React.FC<{
+  id: string;
   projectName: string;
   location: string;
   responsibility: 'your' | 'cquel' | 'supplier';
   status: string;
   actionButton: string;
   solutionType: 'led' | 'solar' | 'heat-pumps' | 'ev-charging';
-}> = ({ projectName, location, responsibility, status, actionButton, solutionType }) => {
+}> = ({ id, projectName, location, responsibility, status, actionButton, solutionType }) => {
   const getSolutionIcon = (type: string) => {
     switch (type) {
       case 'led':
@@ -121,7 +122,7 @@ const SurveyCard: React.FC<{
                             <span 
                   className="text-[14px] font-bold text-[var(--text-primary)] truncate cursor-pointer hover:text-[var(--brand-primary)]"
                           onClick={() => {
-          window.location.href = `/?tab=project-detail&projectId=${survey.id}&sourceTab=surveys`;
+          window.location.href = `/?tab=project-detail&projectId=${id}&sourceTab=surveys`;
         }}
                 >
                   {projectName}
@@ -207,6 +208,7 @@ const SearchFilterBar: React.FC = () => {
 const OngoingSurveysSection: React.FC = () => {
   const surveys = [
     {
+      id: "1",
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "your" as const,
@@ -215,6 +217,7 @@ const OngoingSurveysSection: React.FC = () => {
       solutionType: "heat-pumps" as const
     },
     {
+      id: "2",
       projectName: "Birmingham Warehouse Solar",
       location: "Birmingham • LogisPark",
       responsibility: "your" as const,
@@ -240,6 +243,7 @@ const OngoingSurveysSection: React.FC = () => {
 const PendingSurveysSection: React.FC = () => {
   const surveys = [
     {
+      id: "3",
       projectName: "Edinburgh Data Centre LED",
       location: "Edinburgh • ScotTech",
       responsibility: "cquel" as const,
@@ -248,6 +252,7 @@ const PendingSurveysSection: React.FC = () => {
       solutionType: "led" as const
     },
     {
+      id: "4",
       projectName: "Stuttgart Office LED",
       location: "Berlin • AroundTown",
       responsibility: "cquel" as const,
@@ -273,6 +278,7 @@ const PendingSurveysSection: React.FC = () => {
 const DoneSection: React.FC = () => {
   const surveys = [
     {
+      id: "5",
       projectName: "Liverpool Office HVAC",
       location: "Liverpool • MerseyCorp",
       responsibility: "your" as const,
@@ -281,6 +287,7 @@ const DoneSection: React.FC = () => {
       solutionType: "heat-pumps" as const
     },
     {
+      id: "6",
       projectName: "Liverpool Office HVAC",
       location: "Liverpool • MerseyCorp",
       responsibility: "your" as const,

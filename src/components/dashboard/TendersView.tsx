@@ -254,6 +254,7 @@ const NeedsAttentionSection: React.FC = () => {
 const ActiveTendersSection: React.FC = () => {
   const tenders = [
     {
+      id: "4",
       projectName: "Liverpool Office EV Charging",
       location: "Liverpool • MerseyCorp",
       responsibility: "supplier" as const,
@@ -262,6 +263,7 @@ const ActiveTendersSection: React.FC = () => {
       solutionType: "ev-charging" as const
     },
     {
+      id: "5",
       projectName: "Bristol Retail Heat Pumps",
       location: "Bristol • GreenSpace",
       responsibility: "supplier" as const,
@@ -287,6 +289,7 @@ const ActiveTendersSection: React.FC = () => {
 const TenderingCompleteSection: React.FC = () => {
   const tenders = [
     {
+      id: "6",
       projectName: "Newcastle Facility Solar",
       location: "Newcastle • IndustrialPark",
       responsibility: "your" as const,
@@ -295,6 +298,7 @@ const TenderingCompleteSection: React.FC = () => {
       solutionType: "solar" as const
     },
     {
+      id: "7",
       projectName: "Stuttgart Office Heat Pumps",
       location: "Berlin • AroundTown",
       responsibility: "your" as const,

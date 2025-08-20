@@ -127,6 +127,7 @@ const AdvancedActionDropdown: React.FC<{
 
 // Pricing Card Component
 interface PricingCardProps {
+  id: string;
   projectName: string;
   location: string;
   responsibility?: "your" | "supplier" | "accepted";
@@ -140,6 +141,7 @@ interface PricingCardProps {
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({ 
+  id,
   projectName, 
   location, 
   responsibility, 
@@ -190,7 +192,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
                           <div 
                   className="text-[14px] font-bold text-[var(--text-primary)] truncate cursor-pointer hover:text-[var(--brand-primary)]"
                           onClick={() => {
-          window.location.href = `/?tab=project-detail&projectId=${pricing.id}&sourceTab=pricing`;
+          window.location.href = `/?tab=project-detail&projectId=${id}&sourceTab=pricing`;
         }}
                 >
                   {projectName}
@@ -346,6 +348,7 @@ const SearchFilterBar: React.FC = () => {
 const NeedsAttentionSection: React.FC = () => {
   const pricingItems = [
     {
+      id: "1",
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "your" as const,
@@ -372,6 +375,7 @@ const NeedsAttentionSection: React.FC = () => {
 const ActiveProjectsSection: React.FC = () => {
   const pricingItems = [
     {
+      id: "2",
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "supplier" as const,
@@ -380,6 +384,7 @@ const ActiveProjectsSection: React.FC = () => {
       solutionType: "heat-pumps" as const
     },
     {
+      id: "3",
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "supplier" as const,
@@ -405,6 +410,7 @@ const ActiveProjectsSection: React.FC = () => {
 const AcceptedSection: React.FC = () => {
   const pricingItems = [
     {
+      id: "4",
       projectName: "Manchester Office HVAC",
       location: "Manchester • TechHub",
       responsibility: "accepted" as const,

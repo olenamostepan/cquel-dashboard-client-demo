@@ -131,7 +131,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onSuc
                 Upload your Net Zero plans and project documents
               </h2>
               <p className="text-sm text-gray-600 mt-1">
-                We'll analyze your files and create comprehensive project briefs
+                We&apos;ll analyze your files and create comprehensive project briefs
               </p>
             </div>
           </div>

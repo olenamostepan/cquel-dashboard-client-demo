@@ -38,7 +38,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
             🎉 Documents uploaded successfully!
           </h2>
           <p className="text-gray-600">
-            We'll create comprehensive brief(s) and notify you when it's ready for review (typically 2-3 business days).
+            We&apos;ll create comprehensive brief(s) and notify you when it&apos;s ready for review (typically 2-3 business days).
           </p>
         </div>
 
@@ -72,11 +72,11 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-              We'll send progress updates over the next few days
+              We&apos;ll send progress updates over the next few days
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-              No need to check back - we'll notify you when your briefs are ready
+              No need to check back - we&apos;ll notify you when your briefs are ready
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>

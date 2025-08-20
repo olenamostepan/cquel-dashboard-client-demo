@@ -58,7 +58,7 @@ export default function Home() {
 
   // Update URL when active tab changes
   React.useEffect(() => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     if (active === 'focus') {
       url.searchParams.set('tab', 'focus');
     } else if (active !== 'focus') {
