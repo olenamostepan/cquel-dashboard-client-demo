@@ -110,7 +110,7 @@ export default function Home() {
             }
           },
           {
-            label: "Solar PV - Schenkendorfstraße"
+            label: "Sonnenstraße Solar PV"
           }
         ] : undefined}
         onLogoClick={() => {

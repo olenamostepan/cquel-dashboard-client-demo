@@ -31,8 +31,8 @@ interface TenderResults {
 
 // Sample Data
 const tenderData: TenderResults = {
-  projectName: "Solar PV - Schenkendorfstraße",
-  projectLocation: "Schenkendorfstraße, Berlin",
+  projectName: "Sonnenstraße Solar PV",
+  projectLocation: "Sonnenstraße 19, 80331 München",
   activeFilter: 'price',
   suppliers: [
     {
@@ -112,7 +112,7 @@ const FilterTabs: React.FC<{
               : 'bg-[var(--Colours-ContainerBgGrey,#F9FAFB)] text-[var(--text-primary)] border border-[var(--Colours-BorderDark,#D3D7DC)]'
           }`}
         >
-          PRICE
+          Price
         </button>
         <button
           onClick={() => onFilterChange('quality')}
