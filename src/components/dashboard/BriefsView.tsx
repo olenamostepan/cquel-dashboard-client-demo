@@ -25,7 +25,7 @@ const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onS
   return (
     <div className="flex gap-6 mb-8">
       {/* Generated Briefs */}
-      <Card elevated className="p-6" style={{ width: "280px" }}>
+      <Card elevated className="p-3" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">📝</div>
           <div className="text-[24px] font-extrabold text-[var(--text-primary)]">12</div>
@@ -34,7 +34,7 @@ const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onS
       </Card>
       
       {/* Optimised Briefs */}
-      <Card elevated className="p-6" style={{ width: "280px" }}>
+      <Card elevated className="p-3" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">📈</div>
           <div className="text-[24px] font-extrabold text-[var(--text-primary)]">78%</div>
@@ -43,7 +43,7 @@ const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onS
       </Card>
       
       {/* Published Briefs */}
-      <Card elevated className="p-6" style={{ width: "280px" }}>
+      <Card elevated className="p-3" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">✅</div>
           <div className="text-[24px] font-extrabold text-[var(--text-primary)]">5.3</div>
@@ -52,15 +52,15 @@ const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onS
       </Card>
       
       {/* Creating Brief CTA */}
-      <Card elevated className="p-6" style={{
+      <Card elevated className="p-4" style={{
         width: "450px",
         background: "var(--Colours-BgGreen, #EAF8F1)",
         border: "1px solid var(--Colours-BorderGreen, #D4F0E3)"
       }}>
         <div className="flex flex-col items-start h-full">
-          <div className="text-2xl mb-2">⚡</div>
-          <div className="text-[18px] font-bold text-[var(--text-primary)] mb-2">Creating Brief</div>
-          <div className="text-[14px] text-[var(--text-secondary)] mb-4 flex-grow">
+          <div className="text-2xl mb-1">⚡</div>
+          <div className="text-[18px] font-bold text-[var(--text-primary)] mb-1">Creating Brief</div>
+          <div className="text-[14px] text-[var(--text-secondary)] mb-3 flex-grow">
             Upload your project documents to generate a brief ready for tendering
           </div>
           <Button 
