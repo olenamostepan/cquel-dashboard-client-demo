@@ -517,6 +517,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [showSuccessBanner, setShowSuccessBanner] = useState(false);
+  const [activeBriefsTab, setActiveBriefsTab] = useState("uploaded");
   const [uploads, setUploads] = useState<Array<{
     id: string;
     files: Array<{
@@ -607,6 +608,62 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         {/* Search and Filter Bar */}
         <SearchFilterBar />
         
+        {/* Briefs Tab Bar */}
+        <div className="flex border-b border-[var(--Colours-BorderLight,#F3F4F6)] mb-6">
+          <button
+            onClick={() => setActiveBriefsTab('uploaded')}
+            className={`px-6 py-3 text-[14px] relative ${
+              activeBriefsTab === 'uploaded' 
+                ? 'text-[var(--text-primary)] font-bold' 
+                : 'text-[var(--text-secondary)] font-normal'
+            }`}
+          >
+            Uploaded Plans
+            {activeBriefsTab === 'uploaded' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+            )}
+          </button>
+          <button
+            onClick={() => setActiveBriefsTab('generated')}
+            className={`px-6 py-3 text-[14px] relative ${
+              activeBriefsTab === 'generated' 
+                ? 'text-[var(--text-primary)] font-bold' 
+                : 'text-[var(--text-secondary)] font-normal'
+            }`}
+          >
+            Generated Briefs
+            {activeBriefsTab === 'generated' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+            )}
+          </button>
+          <button
+            onClick={() => setActiveBriefsTab('optimised')}
+            className={`px-6 py-3 text-[14px] relative ${
+              activeBriefsTab === 'optimised' 
+                ? 'text-[var(--text-primary)] font-bold' 
+                : 'text-[var(--text-secondary)] font-normal'
+            }`}
+          >
+            Optimised Briefs
+            {activeBriefsTab === 'optimised' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+            )}
+          </button>
+          <button
+            onClick={() => setActiveBriefsTab('published')}
+            className={`px-6 py-3 text-[14px] relative ${
+              activeBriefsTab === 'published' 
+                ? 'text-[var(--text-primary)] font-bold' 
+                : 'text-[var(--text-secondary)] font-normal'
+            }`}
+          >
+            Published Briefs
+            {activeBriefsTab === 'published' && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+            )}
+          </button>
+        </div>
+        
         {/* Success Banner */}
         {showSuccessBanner && (
           <div 
@@ -632,11 +689,18 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         
         {/* Brief Sections */}
         <div className="space-y-8">
-          <DocumentUploadsSection uploads={uploads} />
-          <OptimisedBriefsSection />
-          <GeneratedBriefsSection />
-          <UploadedPlansSection />
-          <PublishedBriefsSection />
+          {activeBriefsTab === 'uploaded' && (
+            <DocumentUploadsSection uploads={uploads} />
+          )}
+          {activeBriefsTab === 'generated' && (
+            <GeneratedBriefsSection />
+          )}
+          {activeBriefsTab === 'optimised' && (
+            <OptimisedBriefsSection />
+          )}
+          {activeBriefsTab === 'published' && (
+            <PublishedBriefsSection />
+          )}
         </div>
       </div>
 
