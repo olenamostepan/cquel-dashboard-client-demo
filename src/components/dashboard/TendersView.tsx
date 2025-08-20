@@ -80,13 +80,14 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
 
 // Tender Card Component
 const TenderCard: React.FC<{
+  id: string;
   projectName: string;
   location: string;
   responsibility: 'your' | 'cquel' | 'supplier';
   status: string;
   actionButton: string;
   solutionType: 'led' | 'solar' | 'heat-pumps' | 'ev-charging';
-}> = ({ projectName, location, responsibility, status, actionButton, solutionType }) => {
+}> = ({ id, projectName, location, responsibility, status, actionButton, solutionType }) => {
   const getSolutionIcon = (type: string) => {
     switch (type) {
       case 'led':
@@ -120,7 +121,14 @@ const TenderCard: React.FC<{
         {/* Project Info */}
         <div className="flex-1 min-w-0 max-w-[200px] mr-20">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[14px] font-bold text-[var(--text-primary)] truncate">{projectName}</span>
+                            <span 
+                  className="text-[14px] font-bold text-[var(--text-primary)] truncate cursor-pointer hover:text-[var(--brand-primary)]"
+                          onClick={() => {
+          window.location.href = `/?tab=project-detail&projectId=${id}&sourceTab=tenders`;
+        }}
+                >
+                  {projectName}
+                </span>
             <ExternalLink className="w-3 h-3 text-[var(--text-tertiary)] flex-shrink-0" />
           </div>
           <div className="text-[12px] text-[var(--text-secondary)] truncate">{location}</div>
@@ -202,6 +210,7 @@ const SearchFilterBar: React.FC = () => {
 const NeedsAttentionSection: React.FC = () => {
   const tenders = [
     {
+      id: "1",
       projectName: "Stuttgart Office LED",
       location: "Berlin • AroundTown",
       responsibility: "your" as const,
@@ -210,6 +219,7 @@ const NeedsAttentionSection: React.FC = () => {
       solutionType: "led" as const
     },
     {
+      id: "2",
       projectName: "Birmingham Warehouse Solar",
       location: "Birmingham • LogisPark",
       responsibility: "your" as const,
@@ -218,6 +228,7 @@ const NeedsAttentionSection: React.FC = () => {
       solutionType: "solar" as const
     },
     {
+      id: "3",
       projectName: "Edinburgh Data Centre LED",
       location: "Edinburgh • ScotTech",
       responsibility: "your" as const,

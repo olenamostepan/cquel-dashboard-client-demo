@@ -10,25 +10,76 @@ import TendersView from "@/components/dashboard/TendersView";
 import SurveysView from "@/components/dashboard/SurveysView";
 import PricingView from "@/components/dashboard/PricingView";
 import BriefsView from "@/components/dashboard/BriefsView";
+import ProjectDetailView from "@/components/project/ProjectDetailView";
 
 export default function Home() {
   const [active, setActive] = React.useState("focus");
 
+  // Check for URL parameters on component mount
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    const projectIdParam = urlParams.get('projectId');
+    
+    console.log('URL params:', { tabParam, projectIdParam, currentActive: active });
+    
+    if (tabParam) {
+      setActive(tabParam);
+    } else {
+      // Default to focus if no tab parameter
+      setActive('focus');
+    }
+  }, []);
+
+  // Update URL when active tab changes
+  React.useEffect(() => {
+    const url = new URL(window.location);
+    if (active === 'focus') {
+      url.searchParams.set('tab', 'focus');
+    } else if (active !== 'focus') {
+      url.searchParams.set('tab', active);
+    }
+    window.history.replaceState({}, '', url.toString());
+  }, [active]);
+
   return (
     <div className="min-h-screen">
-      <Header customerName="Energise" />
-      <Navigation
-        activeId={active}
-        onChange={setActive}
-        items={[
-          { id: "focus", label: "Focus here now" },
-          { id: "all", label: "All Projects" },
-          { id: "briefs", label: "Briefs" },
-          { id: "tenders", label: "Tenders" },
-          { id: "surveys", label: "Surveys" },
-          { id: "pricing", label: "Pricing" },
-        ]}
+      <Header 
+        customerName="Energise" 
+        showBreadcrumbs={active === "project-detail"}
+        breadcrumbItems={active === "project-detail" ? [
+          {
+            label: "All Projects",
+            onClick: () => {
+              // Get the source tab from URL parameters or default to 'all'
+              const urlParams = new URLSearchParams(window.location.search);
+              const sourceTab = urlParams.get('sourceTab') || 'all';
+              window.location.href = `/?tab=${sourceTab}`;
+            }
+          },
+          {
+            label: "Solar PV - Schenkendorfstraße"
+          }
+        ] : undefined}
+        onLogoClick={() => {
+          console.log('Logo clicked from main page!');
+          setActive('focus');
+        }}
       />
+      {active !== "project-detail" && (
+        <Navigation
+          activeId={active}
+          onChange={setActive}
+          items={[
+            { id: "focus", label: "Focus here now" },
+            { id: "all", label: "All Projects" },
+            { id: "briefs", label: "Briefs" },
+            { id: "tenders", label: "Tenders" },
+            { id: "surveys", label: "Surveys" },
+            { id: "pricing", label: "Pricing" },
+          ]}
+        />
+      )}
 
       <main className="container-page pt-0 pb-8 space-y-5">
         {active === "focus" && (
@@ -100,7 +151,13 @@ export default function Home() {
           </section>
         )}
 
-        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && active !== "pricing" && active !== "briefs" && (
+        {active === "project-detail" && (
+          <section>
+            <ProjectDetailView />
+          </section>
+        )}
+
+        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && active !== "pricing" && active !== "briefs" && active !== "project-detail" && (
           <section>
             <div
               className="text-[var(--text-primary)] font-extrabold"

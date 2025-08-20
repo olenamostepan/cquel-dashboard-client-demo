@@ -187,7 +187,14 @@ const PricingCard: React.FC<PricingCardProps> = ({
       {/* Project Info */}
       <div className="flex-1 min-w-0 max-w-[200px] mr-20">
         <div className="flex items-center gap-2 mb-1">
-          <div className="text-[14px] font-bold text-[var(--text-primary)] truncate">{projectName}</div>
+                          <div 
+                  className="text-[14px] font-bold text-[var(--text-primary)] truncate cursor-pointer hover:text-[var(--brand-primary)]"
+                          onClick={() => {
+          window.location.href = `/?tab=project-detail&projectId=${pricing.id}&sourceTab=pricing`;
+        }}
+                >
+                  {projectName}
+                </div>
           <ExternalLink size={16} className="text-[var(--text-tertiary)] shrink-0" />
         </div>
         <div className="text-[12px] text-[var(--text-secondary)] truncate">{location}</div>

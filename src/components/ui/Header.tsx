@@ -7,16 +7,29 @@ import Button from "@/components/ui/Button";
 interface CoBrandingProps {
   customerName: string;
   customerLogoSrc?: string;
+  showBreadcrumbs?: boolean;
+  breadcrumbItems?: { label: string; onClick?: () => void }[];
+  onLogoClick?: () => void;
 }
 
 
 
-const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc }) => {
+const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc, showBreadcrumbs, breadcrumbItems, onLogoClick }) => {
   return (
     <div className="w-full bg-white border-b border-[var(--border-light)]">
       <div className="container-page flex items-center justify-between py-4">
-        {/* Left cluster: Logo → Powered by CQuel → Title */}
-        <div className="flex items-center gap-4">
+                {/* Left cluster: Logo → Powered by CQuel → Title */}
+        <div 
+          className="flex items-center gap-4 cursor-pointer hover:opacity-80"
+          onClick={() => {
+            console.log('Header area clicked!');
+            if (onLogoClick) {
+              onLogoClick();
+            } else {
+              window.location.href = '/';
+            }
+          }}
+        >
           {/* Customer logo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -42,9 +55,30 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
                 }}
               />
             </div>
-            <div className="text-[var(--text-primary)] font-extrabold" style={{ fontSize: "var(--text-h5)", lineHeight: "32px" }}>
-              Projects Dashboard
-            </div>
+            {showBreadcrumbs && breadcrumbItems ? (
+              <div className="flex items-center gap-2 text-[14px] text-[var(--text-secondary)]">
+                {breadcrumbItems.map((item, index) => (
+                  <React.Fragment key={index}>
+                    <span 
+                      className={`cursor-pointer hover:text-[var(--text-primary)] ${index === breadcrumbItems.length - 1 ? 'text-[var(--text-primary)]' : ''}`}
+                      onClick={item.onClick}
+                    >
+                      {item.label}
+                    </span>
+                    {index < breadcrumbItems.length - 1 && (
+                      <span className="text-[var(--text-secondary)]">&gt;</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            ) : (
+              <div 
+                className="text-[var(--text-primary)] font-extrabold" 
+                style={{ fontSize: "var(--text-h5)", lineHeight: "32px" }}
+              >
+                Projects Dashboard
+              </div>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-3">

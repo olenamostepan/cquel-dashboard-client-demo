@@ -336,7 +336,14 @@ const ProjectsTable: React.FC = () => {
               <tr key={index} className="border-b border-[var(--border-default)] hover:bg-[#f9fafb]">
                 <td className="px-6 py-4 w-[200px]">
                   <div className="flex items-center gap-2">
-                    <span className="text-[14px] font-bold text-[var(--text-primary)] truncate">{project.name}</span>
+                    <span 
+                  className="text-[14px] font-bold text-[var(--text-primary)] truncate cursor-pointer hover:text-[var(--brand-primary)]"
+                  onClick={() => {
+                    window.location.href = `/?tab=project-detail&projectId=${index + 1}&sourceTab=all`;
+                  }}
+                >
+                  {project.name}
+                </span>
                     <ExternalLink className="w-4 h-4 text-[var(--text-tertiary)] flex-shrink-0" />
                   </div>
                 </td>
