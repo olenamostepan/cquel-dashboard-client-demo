@@ -18,7 +18,7 @@ export default function Home() {
   const [active, setActive] = React.useState("focus");
   const [isUploadModalOpen, setIsUploadModalOpen] = React.useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false);
-  const [briefsTabChangeHandler, setBriefsTabChangeHandler] = React.useState<(() => void) | null>(null);
+  const briefsTabChangeHandlerRef = React.useRef<(() => void) | null>(null);
 
   const handleStartNewProject = () => {
     setIsUploadModalOpen(true);
@@ -43,8 +43,8 @@ export default function Home() {
 
   const handleTabChange = (newTab: string) => {
     // Call the briefs tab change handler if we're switching away from briefs
-    if (active === "briefs" && newTab !== "briefs" && briefsTabChangeHandler) {
-      briefsTabChangeHandler();
+    if (active === "briefs" && newTab !== "briefs" && briefsTabChangeHandlerRef.current) {
+      briefsTabChangeHandlerRef.current();
     }
     setActive(newTab);
   };
@@ -183,7 +183,7 @@ export default function Home() {
         {active === "briefs" && (
           <section>
             <BriefsView onTabChange={(handler) => {
-              setBriefsTabChangeHandler(() => handler);
+              briefsTabChangeHandlerRef.current = handler;
             }} />
           </section>
         )}

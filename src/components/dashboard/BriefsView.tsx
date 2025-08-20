@@ -566,18 +566,18 @@ export const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void 
     setShowSuccessBanner(false);
   };
 
-  const handleTabChange = () => {
+  const handleTabChange = React.useCallback(() => {
     // Remove highlighting from all uploads when tab changes
     setUploads(prev => prev.map(upload => ({ ...upload, isHighlighted: false })));
     setShowSuccessBanner(false);
-  };
+  }, []);
 
   // Register the tab change handler when component mounts
   React.useEffect(() => {
     if (onTabChange) {
       onTabChange(handleTabChange);
     }
-  }, [onTabChange]);
+  }, []); // Only run once on mount
 
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
