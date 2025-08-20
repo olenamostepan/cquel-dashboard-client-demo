@@ -90,7 +90,7 @@ export const DocumentUploadsSection: React.FC<DocumentUploadsSectionProps> = ({ 
               <div className="text-[14px] text-[var(--text-secondary)]">
                 {upload.status === 'uploading' && 'Uploading...'}
                 {upload.status === 'processing' && 'Processing'}
-                {upload.status === 'completed' && 'Completed'}
+                {upload.status === 'completed' && 'Generating'}
                 {upload.status === 'error' && 'Error'}
               </div>
               <div className="text-[12px] text-[var(--text-tertiary)]">

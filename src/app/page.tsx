@@ -176,7 +176,7 @@ export default function Home() {
             >
               Welcome back, Andrew
             </div>
-            <AllProjectsView />
+            <AllProjectsView onTabChange={handleTabChange} />
           </section>
         )}
 

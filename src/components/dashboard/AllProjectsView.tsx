@@ -234,7 +234,7 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
 };
 
 // Projects Table Component
-const ProjectsTable: React.FC = () => {
+const ProjectsTable: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTabChange }) => {
   const projects = [
     {
       name: "Solar PV - Schenkendorfstraße",
@@ -244,6 +244,15 @@ const ProjectsTable: React.FC = () => {
       nextAction: "Publishing Brief",
       responsibility: "your" as const,
       action: "Go to Brief"
+    },
+    {
+      name: "Sonnenstraße Solar PV",
+      location: "Berlin, DE",
+      type: "Solar PV",
+      nextStep: "Choosing Supplier",
+      nextAction: "Meeting Supplier",
+      responsibility: "your" as const,
+      action: "Go to Results"
     },
     {
       name: "Schonebeck Solar AroundTown",
@@ -262,15 +271,6 @@ const ProjectsTable: React.FC = () => {
       nextAction: "Choosing Supplier",
       responsibility: "supplier" as const,
       action: ""
-    },
-    {
-      name: "Sonnenstraße Solar PV",
-      location: "Berlin, DE",
-      type: "Solar PV",
-      nextStep: "Choosing Supplier",
-      nextAction: "Meeting Supplier",
-      responsibility: "your" as const,
-      action: "Go to Results"
     },
     {
       name: "Avenue Victor Hugo LED",
@@ -366,26 +366,29 @@ const ProjectsTable: React.FC = () => {
                 </td>
                 {project.action && (
                   <td className="px-6 py-4 w-[140px]">
-                    <Button 
-                      variant="neutral" 
-                      size="custom" 
-                      className="w-[140px] whitespace-nowrap"
+                    <button 
+                      className="w-[140px] whitespace-nowrap px-4 py-2 rounded-md text-[14px] font-bold text-[#374151] bg-[#F9FAFB] border border-[#D3D7DC] hover:bg-[#eceff3] transition-colors cursor-pointer"
+                      style={{
+                        backgroundColor: '#F9FAFB',
+                        color: '#374151',
+                        border: '1px solid #D3D7DC'
+                      }}
                       onClick={() => {
                         if (project.action === "Go to Brief") {
                           window.open("https://cquel-brief-builder.vercel.app/?briefId=4&userId=456", "_blank");
                         } else if (project.action === "Go to Results") {
-                          window.location.href = "/?tab=tender-results";
+                          onTabChange?.('tender-results');
                         } else if (project.action === "Go to Tenders") {
-                          window.location.href = "/?tab=tenders";
+                          onTabChange?.('tenders');
                         } else if (project.action === "Go to Scheduling") {
-                          window.location.href = "/?tab=surveys";
+                          onTabChange?.('surveys');
                         } else if (project.action === "Go to Pricing") {
-                          window.location.href = "/?tab=pricing";
+                          onTabChange?.('pricing');
                         }
                       }}
                     >
                       {project.action === "Go to Brief" ? "Optimise Brief" : project.action}
-                    </Button>
+                    </button>
                   </td>
                 )}
               </tr>
@@ -397,11 +400,11 @@ const ProjectsTable: React.FC = () => {
   );
 };
 
-export const AllProjectsView: React.FC = () => {
+export const AllProjectsView: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTabChange }) => {
   return (
     <div className="space-y-6">
       <StatisticsCards />
-      <ProjectsTable />
+      <ProjectsTable onTabChange={onTabChange} />
     </div>
   );
 };

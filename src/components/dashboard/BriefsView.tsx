@@ -189,7 +189,7 @@ const SearchFilterBar: React.FC = () => {
         {/* Court Filter */}
         <CustomDropdown
           options={courtOptions}
-          placeholder="Court"
+          placeholder="Action"
           isOpen={courtOpen}
           onToggle={() => setCourtOpen(!courtOpen)}
           onSelect={(value, _label) => {
