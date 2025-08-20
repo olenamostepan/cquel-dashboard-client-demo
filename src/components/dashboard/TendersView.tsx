@@ -147,7 +147,16 @@ const TenderCard: React.FC<{
       
       {/* Action Button */}
       <div className="ml-3 flex-shrink-0">
-        <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
+        <Button 
+          variant="neutral" 
+          size="custom" 
+          className="w-[140px] whitespace-nowrap"
+          onClick={() => {
+            if (actionButton === "Go to Results" || actionButton === "Go to Tender results") {
+              window.location.href = `/?tab=tender-results`;
+            }
+          }}
+        >
           {actionButton}
         </Button>
       </div>

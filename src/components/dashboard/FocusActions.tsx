@@ -46,7 +46,15 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
         )}
         </div>
         <div className="mt-auto pt-4">
-          <Button variant={highlight ? "primary" : "neutral"} fullWidth>
+          <Button 
+            variant={highlight ? "primary" : "neutral"} 
+            fullWidth
+            onClick={() => {
+              if (cta === "Go to tender results") {
+                window.location.href = `/?tab=tender-results`;
+              }
+            }}
+          >
             {cta}
           </Button>
         </div>

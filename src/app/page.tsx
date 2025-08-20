@@ -11,6 +11,7 @@ import SurveysView from "@/components/dashboard/SurveysView";
 import PricingView from "@/components/dashboard/PricingView";
 import BriefsView from "@/components/dashboard/BriefsView";
 import ProjectDetailView from "@/components/project/ProjectDetailView";
+import TenderResultsView from "@/components/tender/TenderResultsView";
 import UploadModal from "@/components/upload/UploadModal";
 import SuccessModal from "@/components/upload/SuccessModal";
 
@@ -58,10 +59,12 @@ export default function Home() {
       
       console.log('URL params:', { tabParam, projectIdParam, currentActive: active });
       
-      if (tabParam && ['focus', 'all', 'briefs', 'tenders', 'surveys', 'pricing', 'project-detail'].includes(tabParam)) {
+      if (tabParam && ['focus', 'all', 'briefs', 'tenders', 'surveys', 'pricing', 'project-detail', 'tender-results'].includes(tabParam)) {
+        console.log('Setting active tab to:', tabParam);
         setActive(tabParam);
       } else {
         // Default to focus if no tab parameter or invalid tab
+        console.log('No valid tab param, defaulting to focus');
         setActive('focus');
       }
     } catch (error) {
@@ -203,7 +206,13 @@ export default function Home() {
           </section>
         )}
 
-        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && active !== "pricing" && active !== "briefs" && active !== "project-detail" && (
+        {active === "tender-results" && (
+          <section>
+            <TenderResultsView />
+          </section>
+        )}
+
+        {active !== "focus" && active !== "all" && active !== "tenders" && active !== "surveys" && active !== "pricing" && active !== "briefs" && active !== "project-detail" && active !== "tender-results" && (
           <section>
             <div
               className="text-[var(--text-primary)] font-extrabold"
