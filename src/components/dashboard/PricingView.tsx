@@ -439,9 +439,9 @@ export const PricingView: React.FC = () => {
       <div className="flex gap-6 justify-between">
         {/* Left Container - Title and Statistics Cards */}
         <div className="flex-1 flex flex-col">
-          <h2 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-6">
-            Welcome back, Alex
-          </h2>
+                  <h2 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-6">
+          Welcome back, Andrew
+        </h2>
           <div className="flex gap-5 flex-1">
             <PricingStatisticsCards />
           </div>

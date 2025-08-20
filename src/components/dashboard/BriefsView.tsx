@@ -629,7 +629,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
       {/* Header */}
       <div>
         <h2 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-6">
-          Welcome back, Alex
+          Welcome back, Andrew
         </h2>
       </div>
 

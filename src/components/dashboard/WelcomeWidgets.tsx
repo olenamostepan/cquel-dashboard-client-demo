@@ -12,7 +12,7 @@ export const WelcomeWidgets: React.FC<WelcomeWidgetsProps> = ({ onViewMeetings, 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card elevated className="p-5">
         <div className="flex items-start justify-between">
-          <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next meeting</div>
+          <div className="text-[20px] font-black text-[var(--text-primary)]">Your next meeting</div>
           <a
             className="text-[14px] font-extrabold cursor-pointer"
             style={{ color: "var(--link-blue)" }}
@@ -55,7 +55,7 @@ export const WelcomeWidgets: React.FC<WelcomeWidgetsProps> = ({ onViewMeetings, 
 
       <Card elevated className="p-5">
         <div className="flex items-start justify-between">
-          <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next survey</div>
+          <div className="text-[20px] font-black text-[var(--text-primary)]">Your next survey</div>
           <a
             className="text-[14px] font-extrabold cursor-pointer"
             style={{ color: "var(--link-blue)" }}

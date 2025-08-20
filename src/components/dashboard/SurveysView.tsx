@@ -316,9 +316,9 @@ export const SurveysView: React.FC = () => {
       <div className="flex gap-6 justify-between">
         {/* Left Container - Title and Statistics Cards */}
         <div className="flex-1 flex flex-col">
-          <h2 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-6">
-            Welcome back, Alex
-          </h2>
+                  <h2 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-6">
+          Welcome back, Andrew
+        </h2>
           <div className="flex gap-5 flex-1">
             <SurveyStatisticsCards />
           </div>
@@ -327,7 +327,7 @@ export const SurveysView: React.FC = () => {
         {/* Right Container - Next Survey Widget */}
         <div>
           <Card elevated className="p-5" style={{ width: "450px" }}>
-            <div className="text-[20px] font-extrabold text-[var(--text-primary)]">Your next survey</div>
+                          <div className="text-[20px] font-black text-[var(--text-primary)]">Your next survey</div>
             <div className="mt-3 rounded-lg border border-[#D2E3F2] bg-[#E8F1F8] p-5">
               <div className="grid grid-cols-2 gap-6">
                 {/* Left: icon on top, text below */}

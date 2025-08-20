@@ -18,14 +18,14 @@ export const Navigation: React.FC<NavigationProps> = ({ items, activeId, onChang
   return (
     <div className="w-full bg-white sticky top-0 z-40 border-b border-[var(--border-light)]">
       <div className="container-page">
-        <nav className="flex items-center gap-6 overflow-x-auto h-[50px]">
+        <nav className="flex items-center gap-6 overflow-x-auto h-[70px]">
           {items.map((item) => {
             const isActive = item.id === activeId;
             return (
               <button
                 key={item.id}
                 className={clsx(
-                  "relative h-[50px] flex items-center text-[14px] whitespace-nowrap transition-colors",
+                  "relative h-[70px] flex items-center text-[14px] whitespace-nowrap transition-colors",
                   isActive ? "text-[var(--text-primary)] font-bold" : "text-[var(--text-secondary)] font-normal hover:text-[var(--text-primary)]"
                 )}
                 onClick={() => onChange?.(item.id)}
