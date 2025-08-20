@@ -7,12 +7,14 @@ interface SuccessBannerProps {
   isVisible: boolean;
   onDismiss: () => void;
   fileCount: number;
+  userEmail?: string;
 }
 
 export const SuccessBanner: React.FC<SuccessBannerProps> = ({ 
   isVisible, 
   onDismiss, 
-  fileCount 
+  fileCount,
+  userEmail = "alex.johnson@company.com"
 }) => {
   // Auto-dismiss after 10 seconds
   useEffect(() => {
@@ -50,7 +52,7 @@ export const SuccessBanner: React.FC<SuccessBannerProps> = ({
       </div>
       <div className="space-y-1">
         <div className="text-[14px] text-[var(--text-secondary)]">✅ {fileCount} files processed</div>
-        <div className="text-[14px] text-[var(--text-secondary)]">📧 Updates will be sent to your email</div>
+        <div className="text-[14px] text-[var(--text-secondary)]">📧 Updates will be sent to {userEmail}</div>
       </div>
       <button
         onClick={onDismiss}

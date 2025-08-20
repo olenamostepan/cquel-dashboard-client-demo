@@ -531,7 +531,47 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
     uploadedAt: Date;
     userId: string;
     isHighlighted?: boolean;
-  }>>([]);
+  }>>([
+    {
+      id: "default-1",
+      files: [
+        {
+          id: "file-1",
+          name: "Project_Plans.pdf",
+          size: 2048576,
+          type: "application/pdf",
+          uploadedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) // 2 days ago
+        },
+        {
+          id: "file-2", 
+          name: "Site_Photos.jpg",
+          size: 1048576,
+          type: "image/jpeg",
+          uploadedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+        }
+      ],
+      status: 'completed' as const,
+      uploadedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+      userId: '456',
+      isHighlighted: false
+    },
+    {
+      id: "default-2",
+      files: [
+        {
+          id: "file-3",
+          name: "Energy_Audit.docx",
+          size: 512000,
+          type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          uploadedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) // 5 days ago
+        }
+      ],
+      status: 'completed' as const,
+      uploadedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+      userId: '456',
+      isHighlighted: false
+    }
+  ]);
 
   const handleStartNewProject = () => {
     setIsUploadModalOpen(true);
@@ -553,7 +593,11 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
       isHighlighted: true
     };
 
-    setUploads(prev => [newUpload, ...prev]);
+    // Add new upload and remove highlighting from all previous uploads
+    setUploads(prev => [
+      newUpload,
+      ...prev.map(upload => ({ ...upload, isHighlighted: false }))
+    ]);
     setIsUploadModalOpen(false);
     setIsSuccessModalOpen(true);
   };
@@ -594,6 +638,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         isVisible={showSuccessBanner}
         onDismiss={handleSuccessBannerDismiss}
         fileCount={uploads.length > 0 ? uploads[0].files.length : 0}
+        userEmail="alex.johnson@company.com"
       />
 
       {/* Metrics Section */}
