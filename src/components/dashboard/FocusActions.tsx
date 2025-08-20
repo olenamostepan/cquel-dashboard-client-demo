@@ -11,9 +11,10 @@ interface ActionCardProps {
   highlight?: boolean;
   iconSrc?: string;
   onStartNewProject?: () => void;
+  onTabChange?: (tab: string) => void;
 }
 
-const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, cta, highlight, iconSrc, onStartNewProject }) => {
+const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, cta, highlight, iconSrc, onStartNewProject, onTabChange }) => {
   return (
     <Card elevated className={highlight ? "p-6" : "p-6"} style={highlight ? {
       borderRadius: "var(--CornerRadius, 8px)",
@@ -52,9 +53,11 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
             fullWidth
             onClick={() => {
               if (cta === "Go to tender results") {
-                window.location.href = `/?tab=tender-results`;
+                onTabChange?.('tender-results');
+              } else if (cta === "Go to brief") {
+                onTabChange?.('briefs');
               } else if (cta === "View pricing") {
-                window.location.href = `/?tab=pricing`;
+                onTabChange?.('pricing');
               } else if (cta === "Create new project" && onStartNewProject) {
                 onStartNewProject();
               } else if (cta === "Optimise brief") {
@@ -70,7 +73,7 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
   );
 };
 
-export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onStartNewProject }) => {
+export const FocusActions: React.FC<{ onStartNewProject?: () => void; onTabChange?: (tab: string) => void }> = ({ onStartNewProject, onTabChange }) => {
   return (
           <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
         <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
@@ -85,6 +88,7 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onS
             cta="Go to tender results"
             highlight
             iconSrc="/assets/choose supplier.svg"
+            onTabChange={onTabChange}
           />
           <ActionCard
             title="Publish Your Brief"
@@ -92,6 +96,7 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onS
             project="Birmingham Warehouse Solar, Birmingham • LogisPark"
             cta="Go to brief"
             iconSrc="/assets/publishing.svg"
+            onTabChange={onTabChange}
           />
           <ActionCard
             title="Accept Pricing"
@@ -99,6 +104,7 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onS
             project="Leeds Retail HVAC, Leeds • ShopCentre"
             cta="View pricing"
             iconSrc="/assets/pricing.svg"
+            onTabChange={onTabChange}
           />
         </div>
 
@@ -109,6 +115,7 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onS
             cta="Create new project"
             iconSrc="/assets/New project.svg"
             onStartNewProject={onStartNewProject}
+            onTabChange={onTabChange}
           />
           <ActionCard
             title="Optimise Your Brief"
@@ -116,6 +123,7 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onS
             project="Solar PV - Schenkendorfstraße, Schenkendorfstraße 29, Mülheim an der Ruhr, 45472, DE"
             cta="Optimise brief"
             iconSrc="/assets/optimising brief.svg"
+            onTabChange={onTabChange}
           />
         </div>
       </div>

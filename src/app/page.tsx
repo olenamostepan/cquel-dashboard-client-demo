@@ -158,7 +158,7 @@ export default function Home() {
             </section>
 
                     <section>
-          <FocusActions onStartNewProject={handleStartNewProject} />
+                      <FocusActions onStartNewProject={handleStartNewProject} onTabChange={handleTabChange} />
         </section>
           </>
         )}

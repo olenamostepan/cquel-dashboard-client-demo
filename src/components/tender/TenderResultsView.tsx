@@ -6,7 +6,6 @@ interface Supplier {
   id: string;
   name: string;
   logo?: string;
-  logoText?: string;
   overallScore: number;
   categoryScores: {
     cost: number;
@@ -38,8 +37,7 @@ const tenderData: TenderResults = {
     {
       id: "1",
       name: "Bayern Solar GmbH",
-      logo: "/logos/supplier's logo/Bayern Solar.png",
-      logoText: "LOW CARBON ENERGY",
+      logo: "/logos/suppliers-logos/Bayern Solar.png",
       overallScore: 4.67,
       categoryScores: {
         cost: 4,
@@ -57,8 +55,7 @@ const tenderData: TenderResults = {
     {
       id: "2",
       name: "Hamburg Solartechnik GmbH KG",
-      logo: "/logos/supplier's logo/Hamburg Solartechnik.png",
-      logoText: "EFC SOLAR",
+      logo: "/logos/suppliers-logos/Hamburg Solartechnik.png",
       overallScore: 4.2,
       categoryScores: {
         cost: 4,
@@ -76,8 +73,7 @@ const tenderData: TenderResults = {
     {
       id: "3",
       name: "Süddeutsche Energietechnik",
-      logo: "/logos/supplier's logo/Suddeutsche.png",
-      logoText: "solarVoltaics",
+      logo: "/logos/suppliers-logos/Suddeutsche.png",
       overallScore: 3.2,
       categoryScores: {
         cost: 3,
@@ -142,40 +138,32 @@ const FilterTabs: React.FC<{
 // Supplier Card Component
 const SupplierCard: React.FC<{ supplier: Supplier }> = ({ supplier }) => {
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm border border-[var(--Colours-BorderLight,#F3F4F6)]">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-[var(--Colours-BorderLight,#F3F4F6)]">
       <div className="flex flex-col h-full">
         {/* Logo */}
-        <div className="flex justify-center mb-4">
-          {supplier.logo ? (
+        <div className="flex justify-center mb-3">
+          {supplier.logo && (
             <img
               src={supplier.logo}
               alt={`${supplier.name} logo`}
               className="h-[56px] w-auto object-contain"
               onError={(e) => {
-                // Fallback to text if logo fails to load
+                // Hide the image if it fails to load
                 (e.currentTarget as HTMLImageElement).style.display = 'none';
-                const parent = e.currentTarget.parentElement;
-                if (parent) {
-                  parent.innerHTML = `<span class="text-[14px] font-bold text-[var(--text-primary)] text-center leading-tight">${supplier.logoText}</span>`;
-                }
               }}
             />
-          ) : (
-            <span className="text-[14px] font-bold text-[var(--text-primary)] text-center leading-tight">
-              {supplier.logoText}
-            </span>
           )}
         </div>
         
         {/* Company Name */}
-        <div className="text-center mb-4">
+        <div className="text-center mb-3">
           <div className="text-[14px] font-bold text-[var(--text-primary)]">
             {supplier.name}
           </div>
         </div>
         
         {/* Score */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <div className="text-[24px] font-bold text-[var(--text-primary)]">
             {supplier.overallScore}
           </div>
