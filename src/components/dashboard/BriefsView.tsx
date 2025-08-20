@@ -667,23 +667,35 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         {/* Success Banner */}
         {showSuccessBanner && (
           <div 
-            className="mb-6 p-4 rounded-lg"
+            className="mb-6 relative"
             style={{
-              background: "var(--Colours-BgGreen, #EAF8F1)",
-              border: "1px solid var(--Colours-BorderGreen, #D4F0E3)"
+              borderRadius: "var(--CornerRadius, 8px)",
+              border: "1px solid var(--Colours-BorderBlue, #D2E3F2)",
+              background: "var(--Colours-BgBlue, #E8F1F8)",
+              display: "flex",
+              padding: "var(--Distance-12, 12px) var(--Distance-16, 16px)",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "var(--Distance-8, 8px)",
+              alignSelf: "stretch"
             }}
           >
-            <div className="flex items-center gap-3">
-              <div className="text-sm text-[#1E2832]">
-                🎉 Documents uploaded successfully! We&apos;ll create comprehensive brief(s) and notify you when it&apos;s ready for review (typically 2-3 business days).
-              </div>
-              <button
-                onClick={() => setShowSuccessBanner(false)}
-                className="p-1 hover:bg-green-100 rounded transition-colors"
-              >
-                <X className="w-4 h-4 text-green-600" />
-              </button>
+            <div className="text-[16px] font-bold text-[var(--text-primary)]">
+              🎉 Documents uploaded successfully!
             </div>
+            <div className="text-[14px] text-[var(--text-secondary)]">
+              We&apos;ll create comprehensive brief(s) and notify you when it&apos;s ready for review (typically 2-3 business days).
+            </div>
+            <div className="space-y-1">
+              <div className="text-[14px] text-[var(--text-secondary)]">✅ 3 files processed</div>
+              <div className="text-[14px] text-[var(--text-secondary)]">📧 Updates will be sent to your email</div>
+            </div>
+            <button
+              onClick={() => setShowSuccessBanner(false)}
+              className="absolute top-3 right-3 p-1 hover:bg-blue-100 rounded transition-colors"
+            >
+              <X className="w-4 h-4 text-blue-600" />
+            </button>
           </div>
         )}
         
