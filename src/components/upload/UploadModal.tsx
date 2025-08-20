@@ -123,47 +123,55 @@ export const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onSuc
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <Upload className="w-6 h-6 text-orange-600" />
-            </div>
+            <img
+              src="/assets/New project.svg"
+              alt=""
+              className="w-14 h-14"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTIgNVYxOU0xOSAxMkg1IiBzdHJva2U9IiNmOTczMjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=";
+              }}
+            />
             <div>
-              <h2 className="text-xl font-bold text-gray-900">
+              <h2 className="text-gray-900" style={{ fontSize: "20px", fontWeight: "800" }}>
                 Upload your Net Zero plans and project documents
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                We&apos;ll analyze your files and create comprehensive project briefs
+              <p className="text-gray-600 mt-1" style={{ fontSize: "14px" }}>
+                We&apos;ll analyze your files and generate comprehensive project briefs
               </p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <X className="w-5 h-5 text-gray-500" />
-          </button>
+
         </div>
 
         {/* Content */}
         <div className="p-6">
           {/* Upload Area */}
           <div
-            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+            className={`text-center transition-colors ${
               isDragOver 
                 ? 'border-green-500 bg-green-50' 
-                : 'border-gray-300 hover:border-gray-400'
+                : ''
             }`}
+            style={{
+              borderRadius: "var(--CornerRadius, 8px)",
+              border: isDragOver ? "2px dashed #10b981" : "1px dashed var(--Colours-BorderDark, #D3D7DC)",
+              background: isDragOver ? "#f0fdf4" : "var(--Colours-ContainerBgGrey, #F9FAFB)",
+              padding: "20px"
+            }}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-lg font-medium text-gray-900 mb-2">
+            <Upload className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-900 mb-2" style={{ fontSize: "14px" }}>
               <span className="text-green-600 cursor-pointer hover:text-green-700">
                 Upload a file
               </span>
-              {' '}or drag and drop
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-gray-900 mb-2" style={{ fontSize: "14px" }}>
+              or drag and drop
+            </p>
+            <p className="text-[#1E2832]" style={{ fontSize: "14px" }}>
               PDF, DOCX, JPG or PNG up to 10MB
             </p>
             <input
@@ -175,16 +183,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onSuc
               id="file-upload"
             />
             <label htmlFor="file-upload" className="cursor-pointer">
-              <Button variant="primary" className="mt-4">
-                Choose Files
-              </Button>
+              <div className="mt-4"></div>
             </label>
           </div>
 
           {/* Selected Files */}
           {files.length > 0 && (
             <div className="mt-6">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Selected Files ({files.length})</h3>
+              <h3 className="text-sm font-bold text-gray-900 mb-3">Selected Files ({files.length})</h3>
               <div className="space-y-2">
                 {files.map((file) => (
                   <div key={file.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -210,7 +216,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onSuc
           {/* Help Section */}
           <div className="mt-8">
             <h3 className="text-lg font-bold text-gray-900 mb-4">What documents work best?</h3>
-            <ul className="space-y-2 text-sm text-gray-700">
+            <ul className="space-y-1 text-sm text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
                 Net Zero plans and strategies
@@ -240,15 +246,15 @@ export const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onSuc
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-gray-200">
-          <Button variant="neutral" onClick={onClose}>
+        <div className="flex items-center justify-center gap-4 px-6 pb-6">
+          <Button variant="neutral" onClick={onClose} className="min-w-[300px]">
             Cancel
           </Button>
           <Button 
             variant="primary" 
             onClick={handleContinue}
             disabled={files.length === 0 || isUploading}
-            className="min-w-[180px]"
+            className="min-w-[300px]"
           >
             {isUploading ? 'Uploading...' : 'Continue to Processing'}
           </Button>

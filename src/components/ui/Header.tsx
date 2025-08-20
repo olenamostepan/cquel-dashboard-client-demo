@@ -75,7 +75,7 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
             ) : (
               <div 
                 className="text-[var(--text-primary)] font-extrabold" 
-                style={{ fontSize: "var(--text-h5)", lineHeight: "32px" }}
+                style={{ fontSize: "20px", lineHeight: "32px" }}
               >
                 Projects Dashboard
               </div>
