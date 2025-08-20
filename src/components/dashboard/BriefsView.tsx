@@ -605,9 +605,6 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           All Briefs
         </h2>
         
-        {/* Search and Filter Bar */}
-        <SearchFilterBar />
-        
         {/* Briefs Tab Bar */}
         <div className="flex border-b border-[var(--Colours-BorderLight,#F3F4F6)] mb-6">
           <button
@@ -663,6 +660,9 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
             )}
           </button>
         </div>
+        
+        {/* Search and Filter Bar */}
+        <SearchFilterBar />
         
         {/* Success Banner */}
         {showSuccessBanner && (
