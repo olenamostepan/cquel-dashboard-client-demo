@@ -110,7 +110,7 @@ const SearchFilterBar: React.FC = () => {
     <div className="bg-white rounded-lg mb-6">
       <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
         {/* Search Input */}
-        <div className="relative" style={{ width: "200px" }}>
+        <div className="relative" style={{ width: "300px" }}>
           <input
             type="text"
             placeholder="Search projects..."

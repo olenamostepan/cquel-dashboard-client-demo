@@ -176,7 +176,7 @@ const SearchFilterBar: React.FC = () => {
         placeholder="Search..."
         className="text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
         style={{
-          width: "310px",
+          width: "300px",
           padding: "var(--Distance-8, 8px) var(--Distance-12, 12px)",
           borderRadius: "var(--Distance-8, 8px)",
           border: "1px solid var(--Colours-BorderDark, #D3D7DC)",

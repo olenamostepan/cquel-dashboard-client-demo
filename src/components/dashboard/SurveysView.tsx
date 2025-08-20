@@ -84,7 +84,7 @@ const SurveyCard: React.FC<{
   responsibility: 'your' | 'cquel' | 'supplier';
   status: string;
   actionButton: string;
-  solutionType: 'led' | 'solar' | 'heat-pumps' | 'ev-charging';
+  solutionType: 'led' | 'solar' | 'heat-pumps' | 'ev-charging' | 'smart-metering';
 }> = ({ id, projectName, location, responsibility, status, actionButton, solutionType }) => {
   const getSolutionIcon = (type: string) => {
     switch (type) {
@@ -96,6 +96,8 @@ const SurveyCard: React.FC<{
         return '/assets/heat pumps.svg';
       case 'ev-charging':
         return '/assets/ev charging.svg';
+      case 'smart-metering':
+        return '/assets/led.svg'; // Using LED icon as fallback for smart metering
       default:
         return '/assets/LED.svg';
     }
@@ -144,11 +146,13 @@ const SurveyCard: React.FC<{
       </div>
       
       {/* Action Button */}
-      <div className="ml-3 flex-shrink-0">
-        <Button variant="neutral" size="custom" className="w-[200px] whitespace-nowrap">
-          {actionButton}
-        </Button>
-      </div>
+      {actionButton && (
+        <div className="ml-3 flex-shrink-0">
+          <Button variant="neutral" size="custom" className="w-[240px] whitespace-nowrap">
+            {actionButton}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
@@ -159,7 +163,7 @@ const SearchFilterBar: React.FC = () => {
     <div className="mb-6">
       <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
         {/* Search Input */}
-        <div className="relative" style={{ width: "200px" }}>
+        <div className="relative" style={{ width: "300px" }}>
           <input
             type="text"
             placeholder="Search surveys..."
@@ -209,20 +213,20 @@ const OngoingSurveysSection: React.FC = () => {
   const surveys = [
     {
       id: "1",
-      projectName: "Manchester Office HVAC",
-      location: "Manchester • TechHub",
+      projectName: "Wellington Street HVAC",
+      location: "42 Wellington Street, Manchester, M1 2JF",
       responsibility: "your" as const,
       status: "Survey scheduled on 14:00 23 Aug 2025",
-      actionButton: "View Details",
+      actionButton: "",
       solutionType: "heat-pumps" as const
     },
     {
       id: "2",
-      projectName: "Birmingham Warehouse Solar",
-      location: "Birmingham • LogisPark",
+      projectName: "Sonnenstraße Solar PV",
+      location: "Sonnenstraße 19, 80331 München",
       responsibility: "your" as const,
       status: "Survey scheduled on 10:00 26 Aug 2025",
-      actionButton: "View Details",
+      actionButton: "",
       solutionType: "solar" as const
     }
   ];
@@ -244,21 +248,21 @@ const PendingSurveysSection: React.FC = () => {
   const surveys = [
     {
       id: "3",
-      projectName: "Edinburgh Data Centre LED",
-      location: "Edinburgh • ScotTech",
+      projectName: "Kirkstall Lane LED",
+      location: "10 Kirkstall Lane, Leeds, LS5 3AU",
       responsibility: "cquel" as const,
       status: "Scheduling a survey",
-      actionButton: "Schedule Survey",
+      actionButton: "",
       solutionType: "led" as const
     },
     {
       id: "4",
-      projectName: "Stuttgart Office LED",
-      location: "Berlin • AroundTown",
+      projectName: "Rue de la République EV Charging",
+      location: "85 Rue de la République, 69002 Lyon",
       responsibility: "cquel" as const,
       status: "Scheduling a survey",
-      actionButton: "Schedule Survey",
-      solutionType: "led" as const
+      actionButton: "",
+      solutionType: "ev-charging" as const
     }
   ];
 
@@ -279,21 +283,21 @@ const DoneSection: React.FC = () => {
   const surveys = [
     {
       id: "5",
-      projectName: "Liverpool Office HVAC",
-      location: "Liverpool • MerseyCorp",
+      projectName: "Avenue Victor Hugo Solar PV",
+      location: "120 Avenue Victor Hugo, 75116 Paris",
       responsibility: "your" as const,
       status: "Survey happened on 1 PM 25 Jun 2025",
       actionButton: "Download survey document(s)",
-      solutionType: "heat-pumps" as const
+      solutionType: "solar" as const
     },
     {
       id: "6",
-      projectName: "Liverpool Office HVAC",
-      location: "Liverpool • MerseyCorp",
+      projectName: "Avenue Victor Hugo Solar PV",
+      location: "120 Avenue Victor Hugo, 75116 Paris",
       responsibility: "your" as const,
       status: "Survey happened on 1 PM 25 Jun 2025",
       actionButton: "Download survey document(s)",
-      solutionType: "heat-pumps" as const
+      solutionType: "solar" as const
     }
   ];
 

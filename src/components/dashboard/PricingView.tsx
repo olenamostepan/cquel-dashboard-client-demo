@@ -286,7 +286,7 @@ const SearchFilterBar: React.FC = () => {
       <input
         type="text"
         placeholder="Search pricing documents..."
-        className="w-[400px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+        className="w-[300px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
         style={{
           padding: "var(--Distance-8, 8px) var(--Distance-12, 12px)",
           borderRadius: "var(--Distance-8, 8px)",
@@ -349,13 +349,13 @@ const NeedsAttentionSection: React.FC = () => {
   const pricingItems = [
     {
       id: "1",
-      projectName: "Manchester Office HVAC",
-      location: "Manchester • TechHub",
+      projectName: "Rue de la République EV Charging",
+      location: "85 Rue de la République, 69002 Lyon",
       responsibility: "your" as const,
       _fileName: "Pricing Pack.zip from Heat Pumps LTD",
       status: "Ready for your review",
       showDropdown: true,
-      solutionType: "heat-pumps" as const
+      solutionType: "ev-charging" as const
     }
   ];
 
@@ -376,17 +376,17 @@ const ActiveProjectsSection: React.FC = () => {
   const pricingItems = [
     {
       id: "2",
-      projectName: "Manchester Office HVAC",
-      location: "Manchester • TechHub",
+      projectName: "Avenue Victor Hugo Solar PV",
+      location: "120 Avenue Victor Hugo, 75116 Paris",
       responsibility: "supplier" as const,
-      _fileName: "Pricing Pack.zip from Heat Pumps LTD",
+      _fileName: "Pricing Pack.zip from Solar Solutions LTD",
       status: "Awaiting revised quote",
-      solutionType: "heat-pumps" as const
+      solutionType: "solar" as const
     },
     {
       id: "3",
-      projectName: "Manchester Office HVAC",
-      location: "Manchester • TechHub",
+      projectName: "Friedrichstraße HVAC",
+      location: "Friedrichstraße 44, 10117 Berlin",
       responsibility: "supplier" as const,
       _fileName: "Pricing Pack.zip from Heat Pumps LTD",
       status: "Preparing detailed breakdown",
@@ -411,12 +411,12 @@ const AcceptedSection: React.FC = () => {
   const pricingItems = [
     {
       id: "4",
-      projectName: "Manchester Office HVAC",
-      location: "Manchester • TechHub",
+      projectName: "Argyle Street EV Charging",
+      location: "36 Argyle Street, Glasgow, G2 8BX",
       responsibility: "accepted" as const,
-      _fileName: "Pricing Pack.zip from Heat Pumps LTD",
+      _fileName: "Pricing Pack.zip from EV Solutions LTD",
       status: "Accepted",
-      solutionType: "heat-pumps" as const
+      solutionType: "ev-charging" as const
     }
   ];
 
