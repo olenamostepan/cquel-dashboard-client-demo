@@ -87,7 +87,8 @@ const TenderCard: React.FC<{
   status: string;
   actionButton: string;
   solutionType: 'led' | 'solar' | 'heat-pumps' | 'ev-charging';
-}> = ({ id, projectName, location, responsibility, status, actionButton, solutionType }) => {
+  hideResponsibility?: boolean;
+}> = ({ id, projectName, location, responsibility, status, actionButton, solutionType, hideResponsibility = false }) => {
   const getSolutionIcon = (type: string) => {
     switch (type) {
       case 'led':
@@ -135,9 +136,11 @@ const TenderCard: React.FC<{
         </div>
         
         {/* Responsibility Badge */}
-        <div className="flex items-center justify-center flex-shrink-0 w-[100px] mr-12">
-          <ResponsibilityBadge type={responsibility} />
-        </div>
+        {!hideResponsibility && (
+          <div className="flex items-center justify-center flex-shrink-0 w-[100px] mr-12">
+            <ResponsibilityBadge type={responsibility} />
+          </div>
+        )}
         
         {/* Status */}
         <div className="text-[14px] text-[var(--text-primary)] w-[280px] flex-shrink-0">
@@ -146,20 +149,22 @@ const TenderCard: React.FC<{
       </div>
       
       {/* Action Button */}
-      <div className="ml-3 flex-shrink-0">
-        <Button 
-          variant="neutral" 
-          size="custom" 
-          className="w-[140px] whitespace-nowrap"
-          onClick={() => {
-            if (actionButton === "Go to Results" || actionButton === "Go to Tender results") {
-              window.location.href = `/?tab=tender-results`;
-            }
-          }}
-        >
-          {actionButton}
-        </Button>
-      </div>
+      {actionButton && (
+        <div className="ml-3 flex-shrink-0">
+          <Button 
+            variant="neutral" 
+            size="custom" 
+            className="w-[140px] whitespace-nowrap"
+            onClick={() => {
+              if (actionButton === "Go to Results" || actionButton === "Go to Tender results") {
+                window.location.href = `/?tab=tender-results`;
+              }
+            }}
+          >
+            {actionButton}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
@@ -224,13 +229,13 @@ const NeedsAttentionSection: React.FC = () => {
       location: "Berlin • AroundTown",
       responsibility: "your" as const,
       status: "Meeting with Supplier scheduled on 13:00 25 Aug 2025",
-      actionButton: "View Supplier",
+      actionButton: "",
       solutionType: "led" as const
     },
     {
       id: "2",
-      projectName: "Birmingham Warehouse Solar",
-      location: "Birmingham • LogisPark",
+      projectName: "Sonnenstraße Solar PV",
+      location: "Sonnenstraße 19, 80331 München",
       responsibility: "your" as const,
       status: "Choosing Supplier",
       actionButton: "Go to Results",
@@ -238,11 +243,11 @@ const NeedsAttentionSection: React.FC = () => {
     },
     {
       id: "3",
-      projectName: "Edinburgh Data Centre LED",
-      location: "Edinburgh • ScotTech",
+      projectName: "Avenue Victor Hugo LED",
+      location: "120 Avenue Victor Hugo, 75116 Paris",
       responsibility: "your" as const,
       status: "Scheduling a meeting with Supplier",
-      actionButton: "View Supplier",
+      actionButton: "",
       solutionType: "led" as const
     }
   ];
@@ -268,7 +273,7 @@ const ActiveTendersSection: React.FC = () => {
       location: "Liverpool • MerseyCorp",
       responsibility: "supplier" as const,
       status: "Gathering Responses",
-      actionButton: "View Progress",
+      actionButton: "",
       solutionType: "ev-charging" as const
     },
     {
@@ -277,7 +282,7 @@ const ActiveTendersSection: React.FC = () => {
       location: "Bristol • GreenSpace",
       responsibility: "supplier" as const,
       status: "Preparing Quotes",
-      actionButton: "View Progress",
+      actionButton: "",
       solutionType: "heat-pumps" as const
     }
   ];
@@ -322,7 +327,7 @@ const TenderingCompleteSection: React.FC = () => {
       <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-6">Tendering Complete</h2>
       <div className="space-y-4">
         {tenders.map((tender, index) => (
-          <TenderCard key={index} {...tender} />
+          <TenderCard key={index} {...tender} hideResponsibility={true} />
         ))}
       </div>
     </div>

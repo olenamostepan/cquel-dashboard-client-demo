@@ -16,11 +16,15 @@ interface ActionCardProps {
 
 const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, cta, highlight, iconSrc, onStartNewProject, onTabChange }) => {
   return (
-    <Card elevated className={highlight ? "p-6" : "p-6"} style={highlight ? {
+    <div className={highlight ? "p-6" : "p-6"} style={highlight ? {
       borderRadius: "var(--CornerRadius, 8px)",
       border: "1px solid var(--Colours-BorderGreen, #D4F0E3)",
       background: "var(--Colours-BgGreen, #EAF8F1)"
-    } : undefined}>
+    } : {
+      borderRadius: "var(--CornerRadius, 8px)",
+      border: "1px solid var(--Colours-BorderLight, #F3F4F6)",
+      background: "var(--Colours-ContainerBg, #FFF)"
+    }}>
       <div className="flex flex-col h-full">
         <div className="flex flex-col items-start flex-grow">
           {/* Icon */}
@@ -69,16 +73,16 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
           </Button>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
 export const FocusActions: React.FC<{ onStartNewProject?: () => void; onTabChange?: (tab: string) => void }> = ({ onStartNewProject, onTabChange }) => {
   return (
-          <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
-        <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
-          Focus here now
-        </h2>
+    <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
+      <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
+        Focus here now
+      </h2>
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <ActionCard
@@ -91,11 +95,11 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void; onTabChang
             onTabChange={onTabChange}
           />
           <ActionCard
-            title="Publish Your Brief"
-            description="Send your completed brief to suppliers and begin the tendering process"
-            project="Birmingham Warehouse Solar, Birmingham • LogisPark"
-            cta="Go to brief"
-            iconSrc="/assets/publishing.svg"
+            title="Optimise Your Brief"
+            description="Enhance your brief with additional details and technical specifications before publishing"
+            project="Solar PV - Schenkendorfstraße, Schenkendorfstraße 29, Mülheim an der Ruhr, 45472, DE"
+            cta="Optimise brief"
+            iconSrc="/assets/optimising brief.svg"
             onTabChange={onTabChange}
           />
           <ActionCard
@@ -118,11 +122,11 @@ export const FocusActions: React.FC<{ onStartNewProject?: () => void; onTabChang
             onTabChange={onTabChange}
           />
           <ActionCard
-            title="Optimise Your Brief"
-            description="Enhance your brief with additional details and technical specifications before publishing"
-            project="Solar PV - Schenkendorfstraße, Schenkendorfstraße 29, Mülheim an der Ruhr, 45472, DE"
-            cta="Optimise brief"
-            iconSrc="/assets/optimising brief.svg"
+            title="Publish Your Brief"
+            description="Send your completed brief to suppliers and begin the tendering process"
+            project="Birmingham Warehouse Solar, Birmingham • LogisPark"
+            cta="Go to brief"
+            iconSrc="/assets/publishing.svg"
             onTabChange={onTabChange}
           />
         </div>
