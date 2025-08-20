@@ -38,6 +38,7 @@ const tenderData: TenderResults = {
     {
       id: "1",
       name: "Bayern Solar GmbH",
+      logo: "/logos/supplier's logo/Bayern Solar.png",
       logoText: "LOW CARBON ENERGY",
       overallScore: 4.67,
       categoryScores: {
@@ -56,6 +57,7 @@ const tenderData: TenderResults = {
     {
       id: "2",
       name: "Hamburg Solartechnik GmbH KG",
+      logo: "/logos/supplier's logo/Hamburg Solartechnik.png",
       logoText: "EFC SOLAR",
       overallScore: 4.2,
       categoryScores: {
@@ -74,6 +76,7 @@ const tenderData: TenderResults = {
     {
       id: "3",
       name: "Süddeutsche Energietechnik",
+      logo: "/logos/supplier's logo/Suddeutsche.png",
       logoText: "solarVoltaics",
       overallScore: 3.2,
       categoryScores: {
@@ -98,7 +101,7 @@ const FilterTabs: React.FC<{
   onFilterChange: (filter: 'price' | 'quality' | 'speed') => void 
 }> = ({ activeFilter, onFilterChange }) => {
   return (
-    <div className="mb-6">
+    <div>
       <div className="text-[14px] text-[var(--text-secondary)] mb-3">Filter by:</div>
       <div className="flex gap-2">
         <button
@@ -143,9 +146,25 @@ const SupplierCard: React.FC<{ supplier: Supplier }> = ({ supplier }) => {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-[var(--Colours-BorderLight,#F3F4F6)]">
-            <span className="text-[10px] font-bold text-[var(--text-primary)] text-center leading-tight">
-              {supplier.logoText}
-            </span>
+            {supplier.logo ? (
+              <img
+                src={supplier.logo}
+                alt={`${supplier.name} logo`}
+                className="w-8 h-8 object-contain"
+                onError={(e) => {
+                  // Fallback to text if logo fails to load
+                  (e.currentTarget as HTMLImageElement).style.display = 'none';
+                  const parent = e.currentTarget.parentElement;
+                  if (parent) {
+                    parent.innerHTML = `<span class="text-[10px] font-bold text-[var(--text-primary)] text-center leading-tight">${supplier.logoText}</span>`;
+                  }
+                }}
+              />
+            ) : (
+              <span className="text-[10px] font-bold text-[var(--text-primary)] text-center leading-tight">
+                {supplier.logoText}
+              </span>
+            )}
           </div>
           <div>
             <div className="text-[14px] font-bold text-[var(--text-primary)]">
@@ -196,21 +215,28 @@ const TenderResultsView: React.FC = () => {
 
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
-      {/* Header */}
-      <div>
-        <h1 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-2">
-          {data.projectName}
-        </h1>
-        <p className="text-[14px] text-[var(--text-secondary)]">
-          {data.projectLocation}
-        </p>
+      {/* Header Container */}
+      <div className="bg-white rounded-lg border border-[var(--Colours-BorderLight,#F3F4F6)] p-6">
+        <div className="flex items-center justify-between">
+          {/* Name + Address */}
+          <div>
+            <h1 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-2">
+              {data.projectName}
+            </h1>
+            <p className="text-[14px] text-[var(--text-secondary)]">
+              {data.projectLocation}
+            </p>
+          </div>
+          
+          {/* Filters */}
+          <div>
+            <FilterTabs 
+              activeFilter={data.activeFilter} 
+              onFilterChange={handleFilterChange} 
+            />
+          </div>
+        </div>
       </div>
-
-      {/* Filter Tabs */}
-      <FilterTabs 
-        activeFilter={data.activeFilter} 
-        onFilterChange={handleFilterChange} 
-      />
 
       {/* Supplier Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
