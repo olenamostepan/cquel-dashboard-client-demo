@@ -366,6 +366,16 @@ const OptimisedBriefsSection: React.FC = () => {
 const GeneratedBriefsSection: React.FC = () => {
   const briefs: Brief[] = [
     {
+      id: "1",
+      name: "Solar PV - Schenkendorfstraße",
+      location: "München, DE",
+      type: "Solar PV",
+      status: "generated",
+      courtStatus: "your",
+      timestamp: "Created 10:30 30 Aug 2025",
+      action: "Optimise Brief"
+    },
+    {
       id: "4",
       name: "Liverpool Office EV Charging",
       location: "Liverpool • MerseyCorp",
