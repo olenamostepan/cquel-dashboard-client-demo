@@ -513,7 +513,7 @@ const PublishedBriefsSection: React.FC = () => {
   );
 };
 
-export const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({ onTabChange }) => {
+const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({ onTabChange }) => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [showSuccessBanner, setShowSuccessBanner] = useState(false);

@@ -51,29 +51,38 @@ export default function Home() {
 
   // Check for URL parameters on component mount
   React.useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tabParam = urlParams.get('tab');
-    const projectIdParam = urlParams.get('projectId');
-    
-    console.log('URL params:', { tabParam, projectIdParam, currentActive: active });
-    
-    if (tabParam) {
-      setActive(tabParam);
-    } else {
-      // Default to focus if no tab parameter
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get('tab');
+      const projectIdParam = urlParams.get('projectId');
+      
+      console.log('URL params:', { tabParam, projectIdParam, currentActive: active });
+      
+      if (tabParam && ['focus', 'all', 'briefs', 'tenders', 'surveys', 'pricing', 'project-detail'].includes(tabParam)) {
+        setActive(tabParam);
+      } else {
+        // Default to focus if no tab parameter or invalid tab
+        setActive('focus');
+      }
+    } catch (error) {
+      console.error('Error reading URL parameters:', error);
       setActive('focus');
     }
   }, []);
 
   // Update URL when active tab changes
   React.useEffect(() => {
-    const url = new URL(window.location.href);
-    if (active === 'focus') {
-      url.searchParams.set('tab', 'focus');
-    } else if (active !== 'focus') {
-      url.searchParams.set('tab', active);
+    try {
+      const url = new URL(window.location.href);
+      if (active === 'focus') {
+        url.searchParams.set('tab', 'focus');
+      } else if (active !== 'focus') {
+        url.searchParams.set('tab', active);
+      }
+      window.history.replaceState({}, '', url.toString());
+    } catch (error) {
+      console.error('Error updating URL:', error);
     }
-    window.history.replaceState({}, '', url.toString());
   }, [active]);
 
   return (
