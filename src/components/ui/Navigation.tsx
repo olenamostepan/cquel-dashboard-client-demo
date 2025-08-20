@@ -33,7 +33,7 @@ export const Navigation: React.FC<NavigationProps> = ({ items, activeId, onChang
                 {item.label}
                 <span
                   className={clsx(
-                    "absolute left-0 right-0 -bottom-px h-[2px] rounded-full",
+                    "absolute left-0 right-0 -bottom-px h-[3px] rounded-full",
                     isActive ? "bg-[var(--brand-primary)]" : "bg-transparent"
                   )}
                 />

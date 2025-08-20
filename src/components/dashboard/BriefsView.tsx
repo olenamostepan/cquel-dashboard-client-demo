@@ -605,6 +605,9 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           All Briefs
         </h2>
         
+        {/* Search and Filter Bar */}
+        <SearchFilterBar />
+        
         {/* Briefs Tab Bar */}
         <div className="flex border-b border-[var(--Colours-BorderLight,#F3F4F6)] mb-6">
           <button
@@ -617,7 +620,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Uploaded Plans
             {activeBriefsTab === 'uploaded' && (
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
           <button
@@ -630,7 +633,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Generated Briefs
             {activeBriefsTab === 'generated' && (
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
           <button
@@ -643,7 +646,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Optimised Briefs
             {activeBriefsTab === 'optimised' && (
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
           <button
@@ -656,13 +659,10 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Published Briefs
             {activeBriefsTab === 'published' && (
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
         </div>
-        
-        {/* Search and Filter Bar */}
-        <SearchFilterBar />
         
         {/* Success Banner */}
         {showSuccessBanner && (
