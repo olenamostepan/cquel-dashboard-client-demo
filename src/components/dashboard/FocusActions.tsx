@@ -10,9 +10,10 @@ interface ActionCardProps {
   cta: string;
   highlight?: boolean;
   iconSrc?: string;
+  onStartNewProject?: () => void;
 }
 
-const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, cta, highlight, iconSrc }) => {
+const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, cta, highlight, iconSrc, onStartNewProject }) => {
   return (
     <Card elevated className={highlight ? "p-6" : "p-6"} style={highlight ? {
       borderRadius: "var(--CornerRadius, 8px)",
@@ -52,6 +53,12 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
             onClick={() => {
               if (cta === "Go to tender results") {
                 window.location.href = `/?tab=tender-results`;
+              } else if (cta === "View pricing") {
+                window.location.href = `/?tab=pricing`;
+              } else if (cta === "Create new project" && onStartNewProject) {
+                onStartNewProject();
+              } else if (cta === "Optimise brief") {
+                window.open('https://cquel-brief-builder.vercel.app/?briefId=4&userId=456', '_blank');
               }
             }}
           >
@@ -63,7 +70,7 @@ const ActionCard: React.FC<ActionCardProps> = ({ title, project, description, ct
   );
 };
 
-export const FocusActions: React.FC = () => {
+export const FocusActions: React.FC<{ onStartNewProject?: () => void }> = ({ onStartNewProject }) => {
   return (
           <div className="bg-white rounded-lg border border-[var(--border-light)] p-6">
         <h2 className="text-[var(--text-primary)] font-extrabold mb-6" style={{ fontSize: "20px" }}>
@@ -74,7 +81,7 @@ export const FocusActions: React.FC = () => {
           <ActionCard
             title="Choose Your Supplier"
             description="Review the qualified suppliers and their bids, then choose who you want to work with."
-            project="Frankfurt Data Center LED, Frankfurt • DataFlow"
+            project="Sonnenstraße Solar PV, Sonnenstraße 19, 80331 München"
             cta="Go to tender results"
             highlight
             iconSrc="/assets/choose supplier.svg"
@@ -95,17 +102,18 @@ export const FocusActions: React.FC = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <ActionCard
             title="Start New Project"
             description="Upload your project documents and create a comprehensive brief ready for tendering"
             cta="Create new project"
             iconSrc="/assets/New project.svg"
+            onStartNewProject={onStartNewProject}
           />
           <ActionCard
             title="Optimise Your Brief"
             description="Enhance your brief with additional details and technical specifications before publishing"
-            project="Birmingham Warehouse Solar, Birmingham • LogisPark"
+            project="Solar PV - Schenkendorfstraße, Schenkendorfstraße 29, Mülheim an der Ruhr, 45472, DE"
             cta="Optimise brief"
             iconSrc="/assets/optimising brief.svg"
           />
