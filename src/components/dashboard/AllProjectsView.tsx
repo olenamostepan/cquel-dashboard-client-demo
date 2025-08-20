@@ -252,7 +252,7 @@ const ProjectsTable: React.FC = () => {
       nextStep: "Gathering responses",
       nextAction: "Preparing Quotes",
       responsibility: "cquel" as const,
-      action: "Go to Results"
+      action: ""
     },
     {
       name: "Wellington Street HVAC",
@@ -261,7 +261,7 @@ const ProjectsTable: React.FC = () => {
       nextStep: "Preparing quotes",
       nextAction: "Choosing Supplier",
       responsibility: "supplier" as const,
-      action: "Go to Results"
+      action: ""
     },
     {
       name: "Sonnenstraße Solar PV",
@@ -326,9 +326,11 @@ const ProjectsTable: React.FC = () => {
               <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[80px]">
                 Responsibility
               </th>
-              <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[140px]">
-                Actions
-              </th>
+              {projects.some(project => project.action) && (
+                <th className="px-6 py-4 text-left text-[14px] font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)] w-[140px]">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -362,11 +364,13 @@ const ProjectsTable: React.FC = () => {
                 <td className="px-6 py-4 w-[80px]">
                   <ResponsibilityBadge type={project.responsibility} />
                 </td>
-                <td className="px-6 py-4 w-[140px]">
-                  <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
-                    {project.action}
-                  </Button>
-                </td>
+                {project.action && (
+                  <td className="px-6 py-4 w-[140px]">
+                    <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
+                      {project.action}
+                    </Button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
