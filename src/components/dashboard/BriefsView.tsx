@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { ExternalLink, ChevronDown, ChevronUp, X } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import ResponsibilityBadge from "./ResponsibilityBadge";
@@ -513,7 +513,7 @@ const PublishedBriefsSection: React.FC = () => {
   );
 };
 
-export const BriefsView: React.FC = () => {
+export const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({ onTabChange }) => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [showSuccessBanner, setShowSuccessBanner] = useState(false);
@@ -529,6 +529,7 @@ export const BriefsView: React.FC = () => {
     status: 'uploading' | 'processing' | 'completed' | 'error';
     uploadedAt: Date;
     userId: string;
+    isHighlighted?: boolean;
   }>>([]);
 
   const handleStartNewProject = () => {
@@ -547,7 +548,8 @@ export const BriefsView: React.FC = () => {
       files,
       status: 'processing' as const,
       uploadedAt: new Date(),
-      userId: '456'
+      userId: '456',
+      isHighlighted: true
     };
 
     setUploads(prev => [newUpload, ...prev]);
@@ -563,6 +565,19 @@ export const BriefsView: React.FC = () => {
   const handleSuccessBannerDismiss = () => {
     setShowSuccessBanner(false);
   };
+
+  const handleTabChange = () => {
+    // Remove highlighting from all uploads when tab changes
+    setUploads(prev => prev.map(upload => ({ ...upload, isHighlighted: false })));
+    setShowSuccessBanner(false);
+  };
+
+  // Register the tab change handler when component mounts
+  React.useEffect(() => {
+    if (onTabChange) {
+      onTabChange(handleTabChange);
+    }
+  }, [onTabChange]);
 
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
@@ -591,6 +606,29 @@ export const BriefsView: React.FC = () => {
         
         {/* Search and Filter Bar */}
         <SearchFilterBar />
+        
+        {/* Success Banner */}
+        {showSuccessBanner && (
+          <div 
+            className="mb-6 p-4 rounded-lg"
+            style={{
+              background: "var(--Colours-BgGreen, #EAF8F1)",
+              border: "1px solid var(--Colours-BorderGreen, #D4F0E3)"
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="text-sm text-[#1E2832]">
+                🎉 Documents uploaded successfully! We&apos;ll create comprehensive brief(s) and notify you when it&apos;s ready for review (typically 2-3 business days).
+              </div>
+              <button
+                onClick={() => setShowSuccessBanner(false)}
+                className="p-1 hover:bg-green-100 rounded transition-colors"
+              >
+                <X className="w-4 h-4 text-green-600" />
+              </button>
+            </div>
+          </div>
+        )}
         
         {/* Brief Sections */}
         <div className="space-y-8">

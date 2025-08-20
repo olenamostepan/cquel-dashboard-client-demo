@@ -16,6 +16,7 @@ interface DocumentUpload {
   status: 'uploading' | 'processing' | 'completed' | 'error';
   uploadedAt: Date;
   userId: string;
+  isHighlighted?: boolean;
 }
 
 interface DocumentUploadsSectionProps {
@@ -46,8 +47,12 @@ export const DocumentUploadsSection: React.FC<DocumentUploadsSectionProps> = ({ 
             className="flex items-center gap-4 p-4"
             style={{
               borderRadius: "var(--CornerRadius, 8px)",
-              border: "1px solid var(--Colours-BorderLight, #F3F4F6)",
-              background: "var(--Colours-ContainerBg, #FFF)"
+              border: upload.isHighlighted 
+                ? "1px solid var(--Colours-BorderGreen, #D4F0E3)" 
+                : "1px solid var(--Colours-BorderLight, #F3F4F6)",
+              background: upload.isHighlighted 
+                ? "var(--Colours-BgGreen, #EAF8F1)" 
+                : "var(--Colours-ContainerBg, #FFF)"
             }}
           >
             {/* Document Icon */}

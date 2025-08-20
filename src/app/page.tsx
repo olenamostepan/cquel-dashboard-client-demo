@@ -18,6 +18,7 @@ export default function Home() {
   const [active, setActive] = React.useState("focus");
   const [isUploadModalOpen, setIsUploadModalOpen] = React.useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false);
+  const [briefsTabChangeHandler, setBriefsTabChangeHandler] = React.useState<(() => void) | null>(null);
 
   const handleStartNewProject = () => {
     setIsUploadModalOpen(true);
@@ -38,6 +39,14 @@ export default function Home() {
     setIsSuccessModalOpen(false);
     // Navigate to briefs tab to show the upload
     setActive("briefs");
+  };
+
+  const handleTabChange = (newTab: string) => {
+    // Call the briefs tab change handler if we're switching away from briefs
+    if (active === "briefs" && newTab !== "briefs" && briefsTabChangeHandler) {
+      briefsTabChangeHandler();
+    }
+    setActive(newTab);
   };
 
   // Check for URL parameters on component mount
@@ -95,7 +104,7 @@ export default function Home() {
       {active !== "project-detail" && (
         <Navigation
           activeId={active}
-          onChange={setActive}
+          onChange={handleTabChange}
           items={[
             { id: "focus", label: "Focus here now" },
             { id: "all", label: "All Projects" },
@@ -173,7 +182,9 @@ export default function Home() {
 
         {active === "briefs" && (
           <section>
-            <BriefsView />
+            <BriefsView onTabChange={(handler) => {
+              setBriefsTabChangeHandler(() => handler);
+            }} />
           </section>
         )}
 
