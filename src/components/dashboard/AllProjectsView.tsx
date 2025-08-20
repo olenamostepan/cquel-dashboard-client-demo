@@ -239,7 +239,7 @@ const ProjectsTable: React.FC = () => {
     {
       name: "Solar PV - Schenkendorfstraße",
       location: "München, DE",
-      type: "LED",
+      type: "Solar PV",
       nextStep: "Optimising brief",
       nextAction: "Publishing Brief",
       responsibility: "your" as const,
@@ -248,7 +248,7 @@ const ProjectsTable: React.FC = () => {
     {
       name: "Schonebeck Solar AroundTown",
       location: "Berlin, DE",
-      type: "Solar",
+      type: "Solar PV",
       nextStep: "Gathering responses",
       nextAction: "Preparing Quotes",
       responsibility: "cquel" as const,
@@ -266,7 +266,7 @@ const ProjectsTable: React.FC = () => {
     {
       name: "Sonnenstraße Solar PV",
       location: "Berlin, DE",
-      type: "LED",
+      type: "Solar PV",
       nextStep: "Choosing Supplier",
       nextAction: "Meeting Supplier",
       responsibility: "your" as const,
@@ -284,7 +284,7 @@ const ProjectsTable: React.FC = () => {
     {
       name: "Avenue Victor Hugo Solar PV",
       location: "Paris, FR",
-      type: "EV Charging",
+      type: "Solar PV",
       nextStep: "Scheduling Survey",
       nextAction: "Finalising Price",
       responsibility: "cquel" as const,
@@ -293,7 +293,7 @@ const ProjectsTable: React.FC = () => {
     {
       name: "Friedrichstraße Solar PV",
       location: "München, DE",
-      type: "EV Charging",
+      type: "Solar PV",
       nextStep: "Finalising Price",
       nextAction: "Signing Contract",
       responsibility: "your" as const,
