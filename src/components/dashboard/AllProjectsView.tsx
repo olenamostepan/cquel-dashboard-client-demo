@@ -237,7 +237,7 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
 const ProjectsTable: React.FC = () => {
   const projects = [
     {
-      name: "Edinburgh Data Centre LED",
+      name: "Solar PV - Schenkendorfstraße",
       location: "Edinburgh",
       type: "LED",
       nextStep: "Optimising brief",
@@ -255,7 +255,7 @@ const ProjectsTable: React.FC = () => {
       action: "Go to Results"
     },
     {
-      name: "Manchester Office HVAC",
+      name: "Wellington Street HVAC",
       location: "Manchester",
       type: "Heat Pumps",
       nextStep: "Preparing quotes",
@@ -264,7 +264,7 @@ const ProjectsTable: React.FC = () => {
       action: "Go to Results"
     },
     {
-      name: "Edinburgh Data Centre LED",
+      name: "Sonnenstraße Solar PV",
       location: "Edinburgh",
       type: "LED",
       nextStep: "Choosing Supplier",
@@ -273,7 +273,7 @@ const ProjectsTable: React.FC = () => {
       action: "Go to Results"
     },
     {
-      name: "Edinburgh Data Centre LED",
+      name: "Avenue Victor Hugo LED",
       location: "Edinburgh",
       type: "LED",
       nextStep: "Meeting Supplier",
@@ -282,7 +282,7 @@ const ProjectsTable: React.FC = () => {
       action: "Go to Tenders"
     },
     {
-      name: "Schonebeck Solar AroundTown",
+      name: "Avenue Victor Hugo Solar PV",
       location: "Berlin",
       type: "EV Charging",
       nextStep: "Scheduling Survey",
@@ -291,7 +291,7 @@ const ProjectsTable: React.FC = () => {
       action: "Go to Scheduling"
     },
     {
-      name: "Schonebeck Solar AroundTown",
+      name: "Friedrichstraße Solar PV",
       location: "Berlin",
       type: "EV Charging",
       nextStep: "Finalising Price",
