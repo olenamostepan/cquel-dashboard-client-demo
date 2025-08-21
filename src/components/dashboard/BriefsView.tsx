@@ -509,6 +509,10 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
     setIsUploadModalOpen(true);
   };
 
+  /**
+   * Handle successful file upload
+   * Creates a new upload entry with green highlighting to indicate it's newly added
+   */
   const handleUploadSuccess = (files: Array<{
     id: string;
     name: string;
@@ -522,7 +526,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
       status: 'processing' as const,
       uploadedAt: new Date(),
       userId: '456',
-      isHighlighted: true
+      isHighlighted: true // Mark as new/highlighted
     };
 
     // Add new upload and remove highlighting from all previous uploads
@@ -532,6 +536,18 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
     ]);
     setIsUploadModalOpen(false);
     setIsSuccessModalOpen(true);
+  };
+
+  /**
+   * Remove highlighting from a specific upload when user clicks on it
+   * This indicates the user has seen/viewed the upload
+   */
+  const handleUploadClick = (uploadId: string) => {
+    setUploads(prev => prev.map(upload => 
+      upload.id === uploadId 
+        ? { ...upload, isHighlighted: false }
+        : upload
+    ));
   };
 
   const handleSuccessModalClose = () => {
@@ -548,6 +564,20 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
     setUploads(prev => prev.map(upload => ({ ...upload, isHighlighted: false })));
     setShowSuccessBanner(false);
   }, []);
+
+  /**
+   * Handle click on Uploaded Plans tab
+   * Removes highlighting from all uploads when user visits the tab
+   */
+  const handleUploadedPlansTabClick = () => {
+    setActiveBriefsTab('uploaded');
+    // Remove highlighting from all uploads when user visits the uploaded plans tab
+    setUploads(prev => prev.map(upload => ({ ...upload, isHighlighted: false })));
+  };
+
+  // Check if there are any highlighted uploads
+  const hasHighlightedUploads = uploads.some(upload => upload.isHighlighted);
+  const highlightedUploadsCount = uploads.filter(upload => upload.isHighlighted).length;
 
   // Register the tab change handler when component mounts
   React.useEffect(() => {
@@ -585,16 +615,26 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         {/* Briefs Tab Bar */}
         <div className="flex border-b border-[var(--Colours-BorderLight,#F3F4F6)] mb-6">
           <button
-            onClick={() => setActiveBriefsTab('uploaded')}
+            onClick={handleUploadedPlansTabClick}
             className={`px-6 py-3 text-[14px] relative ${
               activeBriefsTab === 'uploaded' 
                 ? 'text-[var(--text-primary)] font-bold' 
                 : 'text-[var(--text-secondary)] font-normal'
             }`}
           >
-            Uploaded Plans
+            <div className="flex items-center gap-2">
+              Uploaded Plans
+              {hasHighlightedUploads && (
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-[#29b273] rounded-full"></div>
+                  <span className="text-[12px] text-[#29b273] font-bold">
+                    {highlightedUploadsCount}
+                  </span>
+                </div>
+              )}
+            </div>
             {activeBriefsTab === 'uploaded' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
           <button
@@ -607,7 +647,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Generated Briefs
             {activeBriefsTab === 'generated' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
           <button
@@ -620,7 +660,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Optimised Briefs
             {activeBriefsTab === 'optimised' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
           <button
@@ -633,7 +673,7 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           >
             Published Briefs
             {activeBriefsTab === 'published' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#29b273]"></div>
+              <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-[#29b273]"></div>
             )}
           </button>
         </div>
@@ -646,7 +686,10 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         {/* Brief Sections */}
         <div className="space-y-8">
           {activeBriefsTab === 'uploaded' && (
-            <DocumentUploadsSection uploads={uploads} />
+            <DocumentUploadsSection 
+              uploads={uploads} 
+              onUploadClick={handleUploadClick}
+            />
           )}
           {activeBriefsTab === 'generated' && (
             <GeneratedBriefsSection />

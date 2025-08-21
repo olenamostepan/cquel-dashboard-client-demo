@@ -21,9 +21,15 @@ interface DocumentUpload {
 
 interface DocumentUploadsSectionProps {
   uploads: DocumentUpload[];
+  onUploadClick?: (uploadId: string) => void;
 }
 
-export const DocumentUploadsSection: React.FC<DocumentUploadsSectionProps> = ({ uploads }) => {
+/**
+ * Document Uploads Section Component
+ * Displays uploaded documents with highlighting for new items
+ * New items have a green background that disappears when clicked or when tab is visited
+ */
+export const DocumentUploadsSection: React.FC<DocumentUploadsSectionProps> = ({ uploads, onUploadClick }) => {
   if (uploads.length === 0) return null;
 
   const formatDate = (date: Date): string => {
@@ -44,7 +50,7 @@ export const DocumentUploadsSection: React.FC<DocumentUploadsSectionProps> = ({ 
         {uploads.map((upload) => (
           <div 
             key={upload.id}
-            className="flex items-center gap-4 p-4"
+            className="flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors"
             style={{
               borderRadius: "var(--CornerRadius, 8px)",
               border: upload.isHighlighted 
@@ -54,6 +60,7 @@ export const DocumentUploadsSection: React.FC<DocumentUploadsSectionProps> = ({ 
                 ? "var(--Colours-BgGreen, #EAF8F1)" 
                 : "var(--Colours-ContainerBg, #FFF)"
             }}
+            onClick={() => onUploadClick?.(upload.id)}
           >
             {/* Document Icon */}
             <div className="w-14 h-14 flex items-center justify-center flex-shrink-0">
