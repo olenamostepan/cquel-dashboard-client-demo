@@ -445,10 +445,31 @@ const PublishedBriefsSection: React.FC = () => {
   );
 };
 
-const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({ onTabChange }) => {
+const BriefsView: React.FC<{ 
+  onTabChange?: (handler: () => void) => void;
+  showSuccessBanner?: boolean;
+  onDismissSuccessBanner?: () => void;
+  recentUpload?: {
+    id: string;
+    files: Array<{
+      id: string;
+      name: string;
+      size: number;
+      type: string;
+      uploadedAt: Date;
+    }>;
+    status: 'processing' | 'completed' | 'error';
+    uploadedAt: Date;
+    userId: string;
+    isHighlighted: boolean;
+  } | null;
+  onClearRecentUpload?: () => void;
+}> = ({ onTabChange, showSuccessBanner: externalShowSuccessBanner, onDismissSuccessBanner, recentUpload, onClearRecentUpload }) => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [showSuccessBanner, setShowSuccessBanner] = useState(false);
+  const [internalShowSuccessBanner, setInternalShowSuccessBanner] = useState(false);
+  const showSuccessBanner = externalShowSuccessBanner !== undefined ? externalShowSuccessBanner : internalShowSuccessBanner;
+  const setShowSuccessBanner = onDismissSuccessBanner || setInternalShowSuccessBanner;
   const [activeBriefsTab, setActiveBriefsTab] = useState("uploaded");
   const [uploads, setUploads] = useState<Array<{
     id: string;
@@ -536,6 +557,8 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
     ]);
     setIsUploadModalOpen(false);
     setIsSuccessModalOpen(true);
+    // Automatically switch to uploaded plans tab to show the new upload
+    setActiveBriefsTab('uploaded');
   };
 
   /**
@@ -552,18 +575,32 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
 
   const handleSuccessModalClose = () => {
     setIsSuccessModalOpen(false);
-    setShowSuccessBanner(true);
+    // Show success banner when modal is closed
+    if (onDismissSuccessBanner) {
+      // For external notification state, we need to trigger the banner
+      // The main page will handle this through the modal close
+    } else {
+      setInternalShowSuccessBanner(true);
+    }
   };
 
   const handleSuccessBannerDismiss = () => {
-    setShowSuccessBanner(false);
+    if (onDismissSuccessBanner) {
+      onDismissSuccessBanner();
+    } else {
+      setInternalShowSuccessBanner(false);
+    }
   };
 
   const handleTabChange = React.useCallback(() => {
     // Remove highlighting from all uploads when tab changes
     setUploads(prev => prev.map(upload => ({ ...upload, isHighlighted: false })));
-    setShowSuccessBanner(false);
-  }, []);
+    if (onDismissSuccessBanner) {
+      onDismissSuccessBanner();
+    } else {
+      setInternalShowSuccessBanner(false);
+    }
+  }, [onDismissSuccessBanner]);
 
   /**
    * Handle click on Uploaded Plans tab
@@ -586,6 +623,21 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
     }
   }, []); // Only run once on mount
 
+  // Handle recent upload from main page
+  React.useEffect(() => {
+    if (recentUpload) {
+      // Add the recent upload to the uploads list
+      setUploads(prev => [
+        recentUpload,
+        ...prev.map(upload => ({ ...upload, isHighlighted: false }))
+      ]);
+      // Switch to uploaded plans tab
+      setActiveBriefsTab('uploaded');
+      // Clear the recent upload
+      onClearRecentUpload?.();
+    }
+  }, [recentUpload, onClearRecentUpload]);
+
   return (
     <div className="space-y-6" style={{ marginTop: "32px" }}>
       {/* Header */}
@@ -594,14 +646,6 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
           Welcome back, Andrew
         </h2>
       </div>
-
-      {/* Success Banner */}
-      <SuccessBanner 
-        isVisible={showSuccessBanner}
-        onDismiss={handleSuccessBannerDismiss}
-        fileCount={uploads.length > 0 ? uploads[0].files.length : 0}
-        userEmail="alex.johnson@company.com"
-      />
 
       {/* Metrics Section */}
       <BriefsMetricsSection onStartNewProject={handleStartNewProject} />
@@ -681,7 +725,13 @@ const BriefsView: React.FC<{ onTabChange?: (handler: () => void) => void }> = ({
         {/* Search and Filter Bar */}
         <SearchFilterBar />
         
-
+        {/* Success Banner - positioned between search filter and content */}
+        <SuccessBanner 
+          isVisible={showSuccessBanner}
+          onDismiss={handleSuccessBannerDismiss}
+          fileCount={uploads.length > 0 ? uploads[0].files.length : 0}
+          userEmail="alex.johnson@company.com"
+        />
         
         {/* Brief Sections */}
         <div className="space-y-8">

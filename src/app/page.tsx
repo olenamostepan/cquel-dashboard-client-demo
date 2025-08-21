@@ -19,25 +19,54 @@ export default function Home() {
   const [active, setActive] = React.useState("focus");
   const [isUploadModalOpen, setIsUploadModalOpen] = React.useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false);
+  const [showSuccessBanner, setShowSuccessBanner] = React.useState(false);
+  const [recentUpload, setRecentUpload] = React.useState<{
+    id: string;
+    files: Array<{
+      id: string;
+      name: string;
+      size: number;
+      type: string;
+      uploadedAt: Date;
+    }>;
+    status: 'processing' | 'completed' | 'error';
+    uploadedAt: Date;
+    userId: string;
+    isHighlighted: boolean;
+  } | null>(null);
   const briefsTabChangeHandlerRef = React.useRef<(() => void) | null>(null);
 
   const handleStartNewProject = () => {
     setIsUploadModalOpen(true);
   };
 
-  const handleUploadSuccess = (_files: Array<{
+  const handleUploadSuccess = (files: Array<{
     id: string;
     name: string;
     size: number;
     type: string;
     uploadedAt: Date;
   }>) => {
+    // Create a new upload entry with highlighting
+    const newUpload = {
+      id: Math.random().toString(36).substr(2, 9),
+      files,
+      status: 'processing' as const,
+      uploadedAt: new Date(),
+      userId: '456',
+      isHighlighted: true
+    };
+    
+    setRecentUpload(newUpload);
     setIsUploadModalOpen(false);
     setIsSuccessModalOpen(true);
+    // Navigate to briefs tab after successful upload to show notification
+    setActive('briefs');
   };
 
   const handleSuccessModalClose = () => {
     setIsSuccessModalOpen(false);
+    setShowSuccessBanner(true);
     // Navigate to briefs tab to show the upload
     setActive("briefs");
   };
@@ -210,9 +239,15 @@ export default function Home() {
 
         {active === "briefs" && (
           <section>
-            <BriefsView onTabChange={(handler) => {
-              briefsTabChangeHandlerRef.current = handler;
-            }} />
+            <BriefsView 
+              onTabChange={(handler) => {
+                briefsTabChangeHandlerRef.current = handler;
+              }}
+              showSuccessBanner={showSuccessBanner}
+              onDismissSuccessBanner={() => setShowSuccessBanner(false)}
+              recentUpload={recentUpload}
+              onClearRecentUpload={() => setRecentUpload(null)}
+            />
           </section>
         )}
 

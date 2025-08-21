@@ -86,7 +86,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
             onClick={onClose}
             className="w-full"
           >
-            Return to Briefs
+            Continue to processing
           </Button>
         </div>
       </div>
