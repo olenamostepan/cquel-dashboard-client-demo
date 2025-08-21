@@ -39,13 +39,13 @@ const PlanCredits: React.FC<PlanCreditsProps> = ({ userPlan, onUpgradeClick }) =
           borderRadius: "32px",
           background: "var(--Colours-IconActive, #1C75BC)"
         }}>
-          <div className="font-['Wix_Madefor_Display'] font-bold text-[#ffffff] text-[14px] whitespace-pre">
+          <div className="font-bold text-[#ffffff] text-[14px] whitespace-pre">
             {userPlan.planName}
           </div>
         </div>
         
         {/* Credits Text */}
-        <div className="font-['Wix_Madefor_Display'] text-[#4d5761] text-[12px] whitespace-pre">
+        <div className="text-[#4d5761] text-[12px] whitespace-pre">
           <span className="font-normal">Credits left: </span>
           <span className="font-bold">{userPlan.creditsRemaining}</span>
         </div>
