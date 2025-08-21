@@ -254,7 +254,7 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
 };
 
 // Projects Table Component
-const ProjectsTable: React.FC = () => {
+const ProjectsTable: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTabChange }) => {
   const projects = [
     {
       name: "Solar PV - Schenkendorfstraße",
@@ -266,13 +266,13 @@ const ProjectsTable: React.FC = () => {
       action: "Go to Brief"
     },
     {
-      name: "Schonebeck Solar AroundTown",
+      name: "Sonnenstraße Solar PV",
       location: "Berlin, DE",
       type: "Solar PV",
-      nextStep: "Gathering responses",
-      nextAction: "Preparing Quotes",
-      responsibility: "cquel" as const,
-      action: ""
+      nextStep: "Choosing Supplier",
+      nextAction: "Meeting Supplier",
+      responsibility: "your" as const,
+      action: "Go to Results"
     },
     {
       name: "Wellington Street HVAC",
@@ -284,13 +284,13 @@ const ProjectsTable: React.FC = () => {
       action: ""
     },
     {
-      name: "Sonnenstraße Solar PV",
+      name: "Schonebeck Solar AroundTown",
       location: "Berlin, DE",
       type: "Solar PV",
-      nextStep: "Choosing Supplier",
-      nextAction: "Meeting Supplier",
-      responsibility: "your" as const,
-      action: "Go to Results"
+      nextStep: "Gathering responses",
+      nextAction: "Preparing Quotes",
+      responsibility: "cquel" as const,
+      action: ""
     },
     {
       name: "Avenue Victor Hugo LED",
@@ -386,7 +386,25 @@ const ProjectsTable: React.FC = () => {
                 </td>
                 {project.action && (
                   <td className="px-6 py-4 w-[140px]">
-                    <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
+                    <Button 
+                      variant="neutral" 
+                      size="custom" 
+                      className="w-[140px] whitespace-nowrap"
+                      onClick={() => {
+                        if (project.action === "Go to Brief") {
+                          const briefBuilderUrl = `https://cquel-brief-builder.vercel.app/?briefId=${index + 1}&userId=456`;
+                          window.open(briefBuilderUrl, '_blank');
+                        } else if (project.action === "Go to Results" || project.action === "Go to Tender results") {
+                          onTabChange?.('tender-results');
+                        } else if (project.action === "Go to Tenders") {
+                          onTabChange?.('tenders');
+                        } else if (project.action === "Go to Pricing") {
+                          onTabChange?.('pricing');
+                        } else if (project.action === "Go to Scheduling") {
+                          onTabChange?.('surveys');
+                        }
+                      }}
+                    >
                       {project.action}
                     </Button>
                   </td>
@@ -404,7 +422,7 @@ export const AllProjectsView: React.FC<{ onTabChange?: (tab: string) => void }> 
   return (
     <div className="space-y-6">
       <StatisticsCards />
-      <ProjectsTable />
+      <ProjectsTable onTabChange={onTabChange} />
     </div>
   );
 };
