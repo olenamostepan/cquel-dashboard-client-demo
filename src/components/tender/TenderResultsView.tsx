@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SupplierScoringSidebar from "./SupplierScoringSidebar";
 
 
 // Data Interfaces
@@ -206,9 +207,43 @@ const formatCurrencyWithDecimals = (amount: number) => {
 // Main Tender Results Component
 const TenderResultsView: React.FC = () => {
   const [data, setData] = useState<TenderResults>(tenderData);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedSupplierDetails, setSelectedSupplierDetails] = useState<any>(null);
 
   const handleFilterChange = (filter: 'price' | 'quality' | 'speed') => {
     setData(prev => ({ ...prev, activeFilter: filter }));
+  };
+
+  const handleScoreClick = (supplierId: string, category: string) => {
+    const supplier = data.suppliers.find(s => s.id === supplierId);
+    if (!supplier) return;
+
+    const supplierDetails = {
+      supplierId: supplier.id,
+      supplierName: supplier.name,
+      supplierLogo: supplier.logo || "",
+      category: "Cost & Financial Considerations",
+      score: `${supplier.categoryScores.cost}/5`,
+      explanation: `The installer offers competitive pricing with a cost of ${formatCurrency(supplier.financials.totalPrice)} and potential savings of ${Math.round((1 - supplier.financials.totalPrice / 750000) * 100)}%. They provide detailed financial breakdowns and potential cost-saving alternatives, ensuring transparency. Their approach seems financially strategic, making them competitive in the tender process.`,
+      standoutPoints: [
+        "Comprehensive breakdown of prices",
+        "Consideration for other ways to reduce costs",
+        "Transparent approach to pricing"
+      ],
+      allSupplierComparisons: data.suppliers.map(s => ({
+        name: s.name,
+        score: `${s.categoryScores.cost}/5`,
+        description: s.id === supplierId 
+          ? "Cheapest offer, but not clear on the quality"
+          : s.financials.totalPrice < supplier.financials.totalPrice
+          ? "Less than others, but not the cheapest"
+          : "Most expensive offer, with low quality equipment",
+        isSelected: s.id === supplierId
+      }))
+    };
+
+    setSelectedSupplierDetails(supplierDetails);
+    setSidebarOpen(true);
   };
 
   return (
@@ -268,9 +303,12 @@ const TenderResultsView: React.FC = () => {
                 </td>
                 {data.suppliers.map((supplier) => (
                   <td key={supplier.id} className="py-3 px-4 text-right">
-                    <span className="text-[14px] font-bold text-[#29b273]">
+                    <button 
+                      className="text-[14px] font-bold text-[#29b273] hover:underline cursor-pointer"
+                      onClick={() => handleScoreClick(supplier.id, 'cost')}
+                    >
                       {supplier.categoryScores.cost}/5
-                    </span>
+                    </button>
                   </td>
                 ))}
               </tr>
@@ -328,6 +366,13 @@ const TenderResultsView: React.FC = () => {
           </table>
         </div>
       </div>
+
+      {/* Supplier Scoring Sidebar */}
+      <SupplierScoringSidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        supplierDetails={selectedSupplierDetails}
+      />
     </div>
   );
 };
