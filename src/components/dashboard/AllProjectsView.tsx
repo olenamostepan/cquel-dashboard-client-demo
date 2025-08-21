@@ -3,33 +3,53 @@ import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
-// Statistics Cards Component
+// Project Funnel Metrics Cards Component
 const StatisticsCards: React.FC = () => {
+  const metricsData = [
+    {
+      id: 'imports',
+      icon: '📄',
+      number: 12,
+      label: 'Imports',
+      description: 'Documents uploaded'
+    },
+    {
+      id: 'published-briefs',
+      icon: '📋',
+      number: 8,
+      label: 'Published briefs',
+      description: 'Briefs sent to market'
+    },
+    {
+      id: 'active-tenders',
+      icon: '🎯',
+      number: 5,
+      label: 'Active tenders',
+      description: 'Currently receiving bids'
+    },
+    {
+      id: 'signed-contracts',
+      icon: '✅',
+      number: 3,
+      label: 'Signed contracts',
+      description: 'Completed projects'
+    }
+  ];
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-      <Card elevated className="p-6">
-        <div className="flex flex-col items-start">
-          <div className="text-2xl mb-2">💼</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">24</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">Active projects</div>
-        </div>
-      </Card>
-      
-      <Card elevated className="p-6">
-        <div className="flex flex-col items-start">
-          <div className="text-2xl mb-2">⏰</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">4</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">Need your action</div>
-        </div>
-      </Card>
-      
-      <Card elevated className="p-6">
-        <div className="flex flex-col items-start">
-          <div className="text-2xl mb-2">💰</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">£5.3M</div>
-          <div className="text-[14px] text-[var(--text-secondary)]">Total pipeline</div>
-        </div>
-      </Card>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      {metricsData.map((metric) => (
+        <Card key={metric.id} elevated className="p-6">
+          <div className="flex flex-col items-start">
+            <div className="text-2xl mb-2">{metric.icon}</div>
+            <div className="text-[24px] font-extrabold text-[var(--text-primary)]">{metric.number}</div>
+            <div className="text-[14px] text-[var(--text-secondary)]">{metric.label}</div>
+            {metric.description && (
+              <div className="text-[12px] text-[var(--text-tertiary)] mt-1">{metric.description}</div>
+            )}
+          </div>
+        </Card>
+      ))}
     </div>
   );
 };
@@ -110,7 +130,7 @@ const SearchFilterBar: React.FC = () => {
     <div className="bg-white rounded-lg mb-6">
       <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
         {/* Search Input */}
-        <div className="relative" style={{ width: "300px" }}>
+        <div className="relative" style={{ width: "200px" }}>
           <input
             type="text"
             placeholder="Search projects..."
@@ -234,7 +254,7 @@ const ResponsibilityBadge: React.FC<{ type: 'your' | 'cquel' | 'supplier' }> = (
 };
 
 // Projects Table Component
-const ProjectsTable: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTabChange }) => {
+const ProjectsTable: React.FC = () => {
   const projects = [
     {
       name: "Solar PV - Schenkendorfstraße",
@@ -244,15 +264,6 @@ const ProjectsTable: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTa
       nextAction: "Publishing Brief",
       responsibility: "your" as const,
       action: "Go to Brief"
-    },
-    {
-      name: "Sonnenstraße Solar PV",
-      location: "Berlin, DE",
-      type: "Solar PV",
-      nextStep: "Choosing Supplier",
-      nextAction: "Meeting Supplier",
-      responsibility: "your" as const,
-      action: "Go to Results"
     },
     {
       name: "Schonebeck Solar AroundTown",
@@ -271,6 +282,15 @@ const ProjectsTable: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTa
       nextAction: "Choosing Supplier",
       responsibility: "supplier" as const,
       action: ""
+    },
+    {
+      name: "Sonnenstraße Solar PV",
+      location: "Berlin, DE",
+      type: "Solar PV",
+      nextStep: "Choosing Supplier",
+      nextAction: "Meeting Supplier",
+      responsibility: "your" as const,
+      action: "Go to Results"
     },
     {
       name: "Avenue Victor Hugo LED",
@@ -366,29 +386,9 @@ const ProjectsTable: React.FC<{ onTabChange?: (tab: string) => void }> = ({ onTa
                 </td>
                 {project.action && (
                   <td className="px-6 py-4 w-[140px]">
-                    <button 
-                      className="w-[140px] whitespace-nowrap px-4 py-2 rounded-md text-[14px] font-bold text-[#374151] bg-[#F9FAFB] border border-[#D3D7DC] hover:bg-[#eceff3] transition-colors cursor-pointer"
-                      style={{
-                        backgroundColor: '#F9FAFB',
-                        color: '#374151',
-                        border: '1px solid #D3D7DC'
-                      }}
-                      onClick={() => {
-                        if (project.action === "Go to Brief") {
-                          window.open("https://cquel-brief-builder.vercel.app/?briefId=4&userId=456", "_blank");
-                        } else if (project.action === "Go to Results") {
-                          onTabChange?.('tender-results');
-                        } else if (project.action === "Go to Tenders") {
-                          onTabChange?.('tenders');
-                        } else if (project.action === "Go to Scheduling") {
-                          onTabChange?.('surveys');
-                        } else if (project.action === "Go to Pricing") {
-                          onTabChange?.('pricing');
-                        }
-                      }}
-                    >
-                      {project.action === "Go to Brief" ? "Optimise Brief" : project.action}
-                    </button>
+                    <Button variant="neutral" size="custom" className="w-[140px] whitespace-nowrap">
+                      {project.action}
+                    </Button>
                   </td>
                 )}
               </tr>
@@ -404,7 +404,7 @@ export const AllProjectsView: React.FC<{ onTabChange?: (tab: string) => void }> 
   return (
     <div className="space-y-6">
       <StatisticsCards />
-      <ProjectsTable onTabChange={onTabChange} />
+      <ProjectsTable />
     </div>
   );
 };
