@@ -118,6 +118,16 @@ export default function Home() {
           setActive('focus');
         }}
         onStartNewProject={handleStartNewProject}
+        userPlan={{
+          planName: "Enterprise",
+          creditsRemaining: 15,
+          totalCredits: 20,
+          nextRenewal: "September 21, 2025"
+        }}
+        onUpgradePlan={() => {
+          console.log('Upgrade plan clicked');
+          // TODO: Implement upgrade plan functionality
+        }}
       />
       {active !== "project-detail" && active !== "tender-results" && (
         <Navigation

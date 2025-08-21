@@ -3,6 +3,7 @@
 import React from "react";
 import Avatar from "@/components/ui/Avatar";
 import Button from "@/components/ui/Button";
+import PlanCredits from "@/components/ui/PlanCredits";
 
 interface CoBrandingProps {
   customerName: string;
@@ -11,11 +12,18 @@ interface CoBrandingProps {
   breadcrumbItems?: { label: string; onClick?: () => void }[];
   onLogoClick?: () => void;
   onStartNewProject?: () => void;
+  userPlan?: {
+    planName: string;
+    creditsRemaining: number;
+    totalCredits?: number;
+    nextRenewal?: string;
+  };
+  onUpgradePlan?: () => void;
 }
 
 
 
-const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc, showBreadcrumbs, breadcrumbItems, onLogoClick, onStartNewProject }) => {
+const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLogoSrc, showBreadcrumbs, breadcrumbItems, onLogoClick, onStartNewProject, userPlan, onUpgradePlan }) => {
   return (
     <div className="w-full bg-white border-b border-[var(--border-light)]">
       <div className="container-page flex items-center justify-between py-4">
@@ -84,8 +92,19 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
             )}
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-8">
           <Button variant="primary" onClick={onStartNewProject}>Start new project</Button>
+          
+          {/* Plan & Credits - Hidden on mobile */}
+          {userPlan && (
+            <div className="hidden md:block">
+              <PlanCredits 
+                userPlan={userPlan} 
+                onUpgradeClick={onUpgradePlan}
+              />
+            </div>
+          )}
+          
           <Avatar name="Andrew Hall" size={36} />
         </div>
       </div>
