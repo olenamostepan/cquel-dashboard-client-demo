@@ -37,7 +37,7 @@ const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onS
       <Card elevated className="p-3" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">📈</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">78%</div>
+          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">8</div>
           <div className="text-[14px] text-[var(--text-secondary)]">optimised briefs</div>
         </div>
       </Card>
@@ -46,7 +46,7 @@ const BriefsMetricsSection: React.FC<{ onStartNewProject: () => void }> = ({ onS
       <Card elevated className="p-3" style={{ width: "280px" }}>
         <div className="flex flex-col items-start h-full">
           <div className="text-2xl mb-auto">✅</div>
-          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">5.3</div>
+          <div className="text-[24px] font-extrabold text-[var(--text-primary)]">5</div>
           <div className="text-[14px] text-[var(--text-secondary)]">published briefs</div>
         </div>
       </Card>
