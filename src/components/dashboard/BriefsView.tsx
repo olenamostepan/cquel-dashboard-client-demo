@@ -4,7 +4,7 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import ResponsibilityBadge from "./ResponsibilityBadge";
 import UploadModal from "@/components/upload/UploadModal";
-import SuccessModal from "@/components/upload/SuccessModal";
+
 import SuccessBanner from "@/components/upload/SuccessBanner";
 import DocumentUploadsSection from "@/components/upload/DocumentUploadsSection";
 
@@ -464,9 +464,9 @@ const BriefsView: React.FC<{
     isHighlighted: boolean;
   } | null;
   onClearRecentUpload?: () => void;
-}> = ({ onTabChange, showSuccessBanner: externalShowSuccessBanner, onDismissSuccessBanner, recentUpload, onClearRecentUpload }) => {
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  onStartNewProject?: () => void;
+}> = ({ onTabChange, showSuccessBanner: externalShowSuccessBanner, onDismissSuccessBanner, recentUpload, onClearRecentUpload, onStartNewProject }) => {
+
   const [internalShowSuccessBanner, setInternalShowSuccessBanner] = useState(false);
   const showSuccessBanner = externalShowSuccessBanner !== undefined ? externalShowSuccessBanner : internalShowSuccessBanner;
   const setShowSuccessBanner = onDismissSuccessBanner || setInternalShowSuccessBanner;
@@ -527,39 +527,12 @@ const BriefsView: React.FC<{
   ]);
 
   const handleStartNewProject = () => {
-    setIsUploadModalOpen(true);
+    if (onStartNewProject) {
+      onStartNewProject();
+    }
   };
 
-  /**
-   * Handle successful file upload
-   * Creates a new upload entry with green highlighting to indicate it's newly added
-   */
-  const handleUploadSuccess = (files: Array<{
-    id: string;
-    name: string;
-    size: number;
-    type: string;
-    uploadedAt: Date;
-  }>) => {
-    const newUpload = {
-      id: Math.random().toString(36).substr(2, 9),
-      files,
-      status: 'processing' as const,
-      uploadedAt: new Date(),
-      userId: '456',
-      isHighlighted: true // Mark as new/highlighted
-    };
 
-    // Add new upload and remove highlighting from all previous uploads
-    setUploads(prev => [
-      newUpload,
-      ...prev.map(upload => ({ ...upload, isHighlighted: false }))
-    ]);
-    setIsUploadModalOpen(false);
-    setIsSuccessModalOpen(true);
-    // Automatically switch to uploaded plans tab to show the new upload
-    setActiveBriefsTab('uploaded');
-  };
 
   /**
    * Remove highlighting from a specific upload when user clicks on it
@@ -573,16 +546,7 @@ const BriefsView: React.FC<{
     ));
   };
 
-  const handleSuccessModalClose = () => {
-    setIsSuccessModalOpen(false);
-    // Show success banner when modal is closed
-    if (onDismissSuccessBanner) {
-      // For external notification state, we need to trigger the banner
-      // The main page will handle this through the modal close
-    } else {
-      setInternalShowSuccessBanner(true);
-    }
-  };
+
 
   const handleSuccessBannerDismiss = () => {
     if (onDismissSuccessBanner) {
@@ -753,20 +717,7 @@ const BriefsView: React.FC<{
         </div>
       </div>
 
-      {/* Upload Modal */}
-      <UploadModal
-        isOpen={isUploadModalOpen}
-        onClose={() => setIsUploadModalOpen(false)}
-        onSuccess={handleUploadSuccess}
-      />
 
-      {/* Success Modal */}
-      <SuccessModal
-        isOpen={isSuccessModalOpen}
-        onClose={handleSuccessModalClose}
-        fileCount={uploads.length > 0 ? uploads[0].files.length : 0}
-        userEmail="alex.johnson@company.com"
-      />
     </div>
   );
 };

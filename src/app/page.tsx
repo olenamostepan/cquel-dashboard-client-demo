@@ -247,6 +247,7 @@ export default function Home() {
               onDismissSuccessBanner={() => setShowSuccessBanner(false)}
               recentUpload={recentUpload}
               onClearRecentUpload={() => setRecentUpload(null)}
+              onStartNewProject={handleStartNewProject}
             />
           </section>
         )}
