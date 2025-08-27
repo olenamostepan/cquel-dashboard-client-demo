@@ -188,6 +188,7 @@ export default function Home() {
               >
                 Welcome back, Sytze
               </div>
+              {/* Updated name */}
               <div>
                 <WelcomeWidgets
                   onViewMeetings={() => setActive("tenders")}
