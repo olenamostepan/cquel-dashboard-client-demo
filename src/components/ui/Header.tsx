@@ -43,9 +43,9 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={customerLogoSrc || "/logos/Strategy&_logo.svg.png"}
+              src={customerLogoSrc || "/logos/Company logos/Simply-Sustainable-logos-with-®_V1_colour.png"}
               alt={`${customerName} logo`}
-              className="h-[32px] w-auto object-contain"
+              className="h-[48px] w-auto object-contain"
               onError={(e) => {
                 // Fallback to a simple placeholder if PNG fails
                 (e.currentTarget as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIHZpZXdCb3g9IjAgMCA2OCA2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIHJ4PSI4IiBmaWxsPSIjRjVGN0ZCIi8+CiAgPHRleHQgeD0iMzQiIHk9IjQyIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCAnU2Vnb2UgVUknLCBSb2JvdG8sICdIZWx2ZXRpY2EgTmV1ZScsIEFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY2NjY2Ij5TPC90ZXh0Pgo8L3N2Zz4K";
