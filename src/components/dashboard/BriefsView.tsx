@@ -237,7 +237,7 @@ const getSolutionIcon = (type: string) => {
     case "Solar PV":
       return "/assets/solar.svg";
     case "LED":
-      return "/assets/heat pumps.svg"; // Using heat pumps as fallback since LED.svg doesn't exist
+      return "/assets/led.svg";
     case "EV Charging":
       return "/assets/ev charging.svg";
     default:

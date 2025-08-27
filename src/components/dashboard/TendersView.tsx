@@ -91,16 +91,16 @@ const TenderCard: React.FC<{
 }> = ({ id, projectName, location, responsibility, status, actionButton, solutionType, hideResponsibility = false }) => {
   const getSolutionIcon = (type: string) => {
     switch (type) {
-      case 'led':
-        return '/assets/led.svg';
-      case 'solar':
-        return '/assets/solar.svg';
-      case 'heat-pumps':
-        return '/assets/heat pumps.svg';
-      case 'ev-charging':
-        return '/assets/ev charging.svg';
-      default:
-        return '/assets/LED.svg';
+          case 'led':
+      return '/assets/led.svg';
+    case 'solar':
+      return '/assets/solar.svg';
+    case 'heat-pumps':
+      return '/assets/heat pumps.svg';
+    case 'ev-charging':
+      return '/assets/ev charging.svg';
+    default:
+      return '/assets/led.svg';
     }
   };
 

@@ -88,18 +88,18 @@ const SurveyCard: React.FC<{
 }> = ({ id, projectName, location, responsibility, status, actionButton, solutionType }) => {
   const getSolutionIcon = (type: string) => {
     switch (type) {
-      case 'led':
-        return '/assets/led.svg';
-      case 'solar':
-        return '/assets/solar.svg';
-      case 'heat-pumps':
-        return '/assets/heat pumps.svg';
-      case 'ev-charging':
-        return '/assets/ev charging.svg';
-      case 'smart-metering':
-        return '/assets/led.svg'; // Using LED icon as fallback for smart metering
-      default:
-        return '/assets/LED.svg';
+          case 'led':
+      return '/assets/led.svg';
+    case 'solar':
+      return '/assets/solar.svg';
+    case 'heat-pumps':
+      return '/assets/heat pumps.svg';
+    case 'ev-charging':
+      return '/assets/ev charging.svg';
+    case 'smart-metering':
+      return '/assets/led.svg'; // Using LED icon as fallback for smart metering
+    default:
+      return '/assets/led.svg';
     }
   };
 
