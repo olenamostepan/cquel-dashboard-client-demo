@@ -41,10 +41,16 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
               }
             }}
           >
-            <div className="flex items-center justify-center h-[32px] px-4 bg-gray-100 border border-gray-300 rounded-md">
-              <span className="text-sm font-medium text-gray-600">Your logo</span>
-            </div>
-            {/* Client demo placeholder - v3 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={customerLogoSrc || "/logos/Company logos/Logo_M&P_Gruppe.jpg"}
+              alt={`${customerName} logo`}
+              className="h-[32px] w-auto object-contain"
+              onError={(e) => {
+                // Fallback to a simple placeholder if PNG fails
+                (e.currentTarget as HTMLImageElement).src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIHZpZXdCb3g9IjAgMCA2OCA2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNjgiIGhlaWdodD0iNjgiIHJ4PSI4IiBmaWxsPSIjRjVGN0ZCIi8+CiAgPHRleHQgeD0iMzQiIHk9IjQyIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCAnU2Vnb2UgVUknLCBSb2JvdG8sICdIZWx2ZXRpY2EgTmV1ZScsIEFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY2NjY2Ij5TPC90ZXh0Pgo8L3N2Zz4K";
+              }}
+            />
           </div>
           <div className="inline-flex items-center gap-4">
             <div className="inline-flex items-center gap-2 rounded-lg bg-[var(--page)] border border-[var(--border-light)] px-4 h-10">
@@ -99,7 +105,7 @@ const CoBrandingHeader: React.FC<CoBrandingProps> = ({ customerName, customerLog
             </div>
           )}
           
-          <Avatar name="Sarah Johnson" size={36} />
+          <Avatar name="Miguel Johnson" size={36} />
         </div>
       </div>
     </div>
