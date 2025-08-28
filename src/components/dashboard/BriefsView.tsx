@@ -607,7 +607,7 @@ const BriefsView: React.FC<{
       {/* Header */}
       <div>
         <h2 className="text-[24px] font-extrabold text-[var(--text-primary)] mb-6">
-                                                 Welcome back, Andries
+                                                 Welcome back, Sarah
         </h2>
       </div>
 
