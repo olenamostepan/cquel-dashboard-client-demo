@@ -186,7 +186,7 @@ export default function Home() {
                   paddingBottom: "var(--Distance-32, 32px)",
                 }}
               >
-                Welcome back, Sarah
+                Welcome back, Miguel
               </div>
               {/* Client demo version */}
               <div>
