@@ -186,7 +186,7 @@ export default function Home() {
                   paddingBottom: "var(--Distance-32, 32px)",
                 }}
               >
-                Welcome back, Miguel
+                Welcome back
               </div>
               {/* Client demo version */}
               <div>
@@ -214,7 +214,7 @@ export default function Home() {
                 paddingBottom: "var(--Distance-32, 32px)",
               }}
             >
-              Welcome back, Miguel
+              Welcome back
             </div>
             <AllProjectsView onTabChange={handleTabChange} />
           </section>
@@ -276,7 +276,7 @@ export default function Home() {
                 paddingBottom: "var(--Distance-32, 32px)",
               }}
             >
-              Welcome back, Miguel
+              Welcome back
             </div>
             <div className="bg-white border border-[var(--border-light)] rounded-lg p-6 text-[14px] text-[var(--text-secondary)]">
               {active.charAt(0).toUpperCase() + active.slice(1)} content coming soon
